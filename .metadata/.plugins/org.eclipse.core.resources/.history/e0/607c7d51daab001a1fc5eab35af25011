@@ -1,0 +1,15 @@
+package kadai1;
+
+/**
+ * 
+ * ファイルの中の任意の文字列を任意の文字列に変換し、新規ファイルに書き込みます
+ * @param string 元のパス
+ * @param string 先のパス
+ * @author sakaishow
+ *
+ */
+public class FileTextReplace {
+	void fileTextReplace() {
+		
+	}
+}

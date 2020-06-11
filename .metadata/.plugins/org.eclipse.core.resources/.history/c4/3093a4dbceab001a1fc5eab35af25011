@@ -1,0 +1,39 @@
+package kadai1;
+
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+
+public class Kadai1 {
+
+	public static void main(String[] args) throws Exception {
+		Path fromPath = Path.of("/Users/sakaishow/bss/test.txt");
+		Path editPath = Path.of("/Users/sakaishow/bss/edit.txt");
+		Charset charset = Charset.forName("MS932");
+		
+		try {
+			// 元のファイルが存在するか確認
+			if(!Files.exists(fromPath)) {
+				throw new Exception(fromPath + "ファイルが存在しません");
+			}
+			
+			// 元のファイルに文字が存在するか確認
+			String originText = Files.readString(fromPath, charset);
+			if(originText.isEmpty()) {
+				throw new Exception(fromPath + "に文字が存在しません");
+			}
+			
+			String replacedText = originText.replaceAll("12", "xy");
+			Files.copy(fromPath, editPath, StandardCopyOption.REPLACE_EXISTING);
+			Files.writeString(editPath, replacedText);
+		} catch(IOException e) {
+			e.printStackTrace();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("処理が終わりました");
+	}
+}
