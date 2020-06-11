@@ -23,60 +23,70 @@ public class FileTextReplaceRobot {
 	Path toPath;
 	String fromStr;
 	String toStr;
+	Scanner sc;
 	
 	FileTextReplaceRobot(String fromPath, String toPath, String fromStr, String toStr) {
 		this.fromPath = Path.of(fromPath);
 		this.toPath = Path.of(toPath);
 		this.fromStr = fromStr;
 		this.toStr = toStr;
+		this.sc = new Scanner(System.in);
 	}
 	
 	void run() {
-		Scanner sc = new Scanner(System.in);
 		String input;
 		Charset charset = Charset.forName("MS932");
 		
-		try {
-			while(true) {
-				// 元のファイルが存在するか確認
-				if(!Files.exists(fromPath)) {
-					System.out.println(getFileName(fromPath) + "が存在しません。作成してください");
-					System.out.println("作成したら「1」, キャンセルする場合は「1以外」を入力してください");
-					input = sc.nextLine();
-					if(Objects.equals(input, "1")) {
-						continue;
-					}else {
-						sc.close();
-						System.out.println("キャンセルしました");
-						break;
-					}
+		while(true) {
+			// 元のファイルが存在するか確認
+			if(!Files.exists(this.fromPath)) {
+				System.out.println(getFileName(this.fromPath) + "が存在しません。作成してください");
+				System.out.println("作成したら「1」, キャンセルする場合は「1以外」を入力してください");
+				input = sc.nextLine();
+				if(Objects.equals(input, "1")) {
+					continue;
+				}else {
+					System.out.println("キャンセルしました\n------------");
+					break;
 				}
-				
-				// 元のファイルに文字が存在するか確認
-				String originText = Files.readString(fromPath, charset);
-				if(originText.isEmpty()) {
-					System.out.println(getFileName(fromPath) + "に文字を入力してください");
-					System.out.println("入力したら「1」, キャンセルする場合は「1以外」を入力してください");
-					input = sc.nextLine();
-					if(Objects.equals(input, "1")) {
-						continue;
-					}else {
-						System.out.println("キャンセルしました");
-						sc.close();
-						break;
-					}
+			}
+			
+			String originText = null;
+			try {
+				originText = Files.readString(this.fromPath, charset);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			// 元のファイルになんらかの文字が存在するか確認
+			if(originText.isEmpty()) {
+				System.out.println(getFileName(this.fromPath) + "に文字を入力してください");
+				System.out.println("入力したら「1」, キャンセルする場合は「1以外」を入力してください");
+				input = sc.nextLine();
+				if(Objects.equals(input, "1")) {
+					continue;
+				}else {
+					System.out.println("キャンセルしました\n------------");
+					break;
 				}
-				
-				String replacedText = originText.replaceAll(this.fromStr, this.toStr);
-				Files.copy(fromPath, toPath, StandardCopyOption.REPLACE_EXISTING);
-				Files.writeString(toPath, replacedText);
-				System.out.println("処理が完了しました");
-				break;
-			} 
-		} catch(IOException e) {
-			e.printStackTrace();
-		} catch(Exception e) {
-			e.printStackTrace();
+			}
+			
+			String replacedText = originText.replaceAll(this.fromStr, this.toStr);
+			
+			try {
+				Files.copy(this.fromPath, this.toPath, StandardCopyOption.REPLACE_EXISTING);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			try {
+				Files.writeString(this.toPath, replacedText);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			System.out.println(getFileName(toPath) + "の作成が完了しました");
+			break;
 		}
 	}
 	
