@@ -1,15 +1,20 @@
 package kadai1;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.util.Objects;
+import java.util.Scanner;
+
 public class Main {
 
 	public static void main(String[] args) throws Exception {
 		String fromPath = "/Users/sakaishow/bss/test.txt";
 		String toPath = "/Users/sakaishow/bss/edit.txt";
-		String toPath2 = "/Users/sakaishow/bss/edit2.txt";
 		
 		FileTextReplaceRobot robot1 = new FileTextReplaceRobot(fromPath, toPath, "12", "xy");
 		robot1.run();
-		FileTextReplaceRobot robot2 = new FileTextReplaceRobot(fromPath, toPath2, "12", "zp");
-		robot2.run();
 	}
 }

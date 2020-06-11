@@ -1,0 +1,39 @@
+package kadai1;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+/**
+ * 
+ * ファイルの中の任意の文字列を任意の文字列に変換し、新規ファイルに書き込みます
+ * @param string 元のパス
+ * @param string 先のパス
+ * @author sakaishow
+ *
+ */
+public class FileTextReplace {
+	Path fromPath;
+	Path toPath;
+	String fromStr;
+	String toStr;
+	
+	FileTextReplace(String fromPath, String toPath, String fromStr, String toStr) {
+		this.fromPath = Path.of(fromPath);
+		this.toPath = Path.of(toPath);
+		this.fromStr = fromStr;
+		this.toStr = toStr;
+	}
+	
+	boolean fileExists() {
+		if(!Files.exists(fromPath)) {
+			System.out.println(getFileName(fromPath) + "が存在しません。作成してください");
+			System.out.println("作成したら「1」, キャンセルする場合は「1以外」を入力してください");
+		}
+	}
+	
+	public static String getFileName(Path path) {
+		String strPath = path.toString();
+		String[] ele = strPath.split("/");
+		return ele[ele.length - 1];
+	}
+}

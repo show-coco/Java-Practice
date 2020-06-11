@@ -9,7 +9,6 @@ public class Main {
 		
 		FileTextReplaceRobot robot1 = new FileTextReplaceRobot(fromPath, toPath, "12", "xy");
 		robot1.run();
-		FileTextReplaceRobot robot2 = new FileTextReplaceRobot(fromPath, toPath2, "12", "zp");
-		robot2.run();
+		FileTextReplaceRobot robot2 = new FileTextReplaceRobot(fromPath, toPath, "12", "zp");
 	}
 }
