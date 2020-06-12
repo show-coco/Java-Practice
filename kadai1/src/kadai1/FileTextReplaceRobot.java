@@ -73,6 +73,15 @@ public class FileTextReplaceRobot {
 			
 			String replacedText = originText.replaceAll(this.fromStr, this.toStr);
 			
+			// 保存先フォルダに既に同じ名前のファイルが存在するか確認
+			if(Files.exists(this.toPath)) {
+				System.out.println(getFileName(this.fromPath) + "が既に存在しています。置き換えますか？\n Yes->「1」, No->「1以外」");
+				input = sc.nextLine();
+				if(!Objects.equals(input, "1")) {
+					System.out.println("キャンセルしました\n------------");
+					break;
+				}
+			}
 			try {
 				Files.copy(this.fromPath, this.toPath, StandardCopyOption.REPLACE_EXISTING);
 			} catch (IOException e) {
@@ -85,7 +94,7 @@ public class FileTextReplaceRobot {
 				e.printStackTrace();
 			}
 			
-			System.out.println(getFileName(toPath) + "の作成が完了しました");
+			System.out.println(getFileName(toPath) + "の作成が完了しました\n-------------");
 			break;
 		}
 	}
