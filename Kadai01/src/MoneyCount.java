@@ -7,7 +7,7 @@ public class MoneyCount {
 	public static final boolean	TRUE	 	= true;											// boolean型の値true
 	public static final int		MAX_DIGIT 	= 3;											// コインやお札の枚数の最大桁数
 	public static final int		MONEY_LOWER	= 0;											// 入力できる料金の最低値
-	public static final int		MONEY_UPPER	= (int)(10000*Math.pow(10, MAX_DIGIT))-1;		// 入力できる料金の最大値
+	public static final int		MONEY_UPPER	= (int)(1e4*Math.pow(10, MAX_DIGIT))-1;			// 入力できる料金の最大値
 	public static final int		LOWER		= 0;											// 繰り返しの初期値
 	public static final int		ZERO		= 0;											// int型の値0
 	public static final int		ABNORMAL	= -1;											// 異常が発生した場合に返却する値
