@@ -8,7 +8,7 @@ public class MoneyCount {
 	public static final boolean	FALSE	 	= false;
 	public static final boolean	TRUE	 	= true;
 	public static final int		INPUT_FIRST	= 0;
-	public static final int		MAX_DIGIT 	= 4;
+	public static final int		MAX_DIGIT 	= 3;
 	public static final int		MONEY_LOWER	= 0;
 	public static final int		MONEY_UPPER	= (int)(10000*Math.pow(10, MAX_DIGIT))-1;
 	public static final int		LOWER		= 0;
@@ -36,8 +36,8 @@ public class MoneyCount {
 	}
 	
 	/**
-	 * 標準入力を受け取り、正しい値かを判定します
-	 * @return int型 標準入力から受け取り、バリデーションされた値。IOExceptionが吐かれた場合は、-1を返す
+	 * 標準入力を受け取り、正しい値かを判定するメソッドを呼び出し、正しければ入力された値を返却する
+	 * @return int型 標準入力から受け取り、バリデーションされた値を返却。IOExceptionが吐かれた場合は、-1を返却
 	 */
 	static int enterMoney() {
 		System.out.println(I001);
@@ -59,15 +59,25 @@ public class MoneyCount {
 		}
 	}
 	
+	/**
+	 * 入力された料金
+	 * @param money
+	 * @return
+	 */
 	static int[] calcMoneyCount(int money) {
 		int[] result = new int[YENS.length];
-		for(int i=0; i<YENS.length; i++) {
+		for(int i=ZERO; i<YENS.length; i++) {
 			result[i] = money / YENS[i];
 			money %= YENS[i];
 		}
 		return result;
 	}
 	
+	/**
+	 * 入力された数値が正しいか検証するメソッド
+	 * @param input
+	 * @return boolean型 値が正しければTRUE、正しくなければFALSEを返却する
+	 */
 	static boolean validation(int input) {
 		if(input <= MONEY_LOWER) {
 			 System.out.printf(W002 + I002, MONEY_LOWER);
