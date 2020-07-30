@@ -7,6 +7,7 @@ public class MoneyCount {
 	public static final boolean	TRUE	 	= true;											// boolean型の値true
 	public static final int		MAX_DIGIT 	= 3;											// コインやお札の枚数の最大桁数
 	public static final int		MONEY_LOWER	= 0;											// 入力できる料金の最低値
+	public static final int[] 	YENS 		= { 100000, 10000, 5000, 1000, 500, 100, 50, 10, 5, 1 };// 使用するコインやお札の配列
 	public static final int		MONEY_UPPER	= (int)(1e4*Math.pow(10, MAX_DIGIT))-1;			// 入力できる料金の最大値
 	public static final int		LOWER		= 0;											// 繰り返しの初期値
 	public static final int		ZERO		= 0;											// int型の値0
@@ -19,7 +20,6 @@ public class MoneyCount {
 	public static final String 	I002 		= "数値を再入力してください\n";						// 入力値が正しくなく、再入力前に標準出力する値
 	public static final String 	I003 		= "プログラムを強制終了します";						// 異常が発生し、プログラムを強制終了する場合に標準出力する値
 	public static final String 	FORMAT 		= "%5d円：%" + MAX_DIGIT + "d枚\n";				// それぞれのコインとお札の枚数を標準出力する際に使用する値
-	public static final int[] 	YENS 		= { 10000, 5000, 1000, 500, 100, 50, 10, 5, 1 };// 使用するコインやお札の配列
 	
 	public static void main(String[] args) {
 		int money = enterMoney(); 						// 入力値または強制終了するための値を受け取る
