@@ -48,7 +48,7 @@ public class TestSumList {
 						Integer.parseInt(line[MATH_INDEX]), 
 						Integer.parseInt(line[ENGLISH_INDEX])
 						);
-				if (st.isRetest()) { 
+				if (st.isRetest()) {
 					retesters.add(st); // 再試験者リストへ格納
 				} else {
 					ranking.add(st);  // 順位リストへ格納		
@@ -63,15 +63,17 @@ public class TestSumList {
 									.collect(Collectors.toList());
 
 		// それぞれの最大得点の桁取得
-		Optional<Integer> nameMax = sortedRanking.stream().map(st -> st.getName().length()).max(Comparator.comparingInt(a -> a));
+		int nameMax = sortedRanking.stream().map(Student::getName).max(Comparator.comparing(String::length)).get().length();
 		int japaneseMax = sortedRanking.stream().max(Comparator.comparing(Student::getJapanese)).get().getJapanese();
 		int mathMax= sortedRanking.stream().max(Comparator.comparing(Student::getMath)).get().getMath();
 		int englishMax = sortedRanking.stream().max(Comparator.comparing(Student::getEnglish)).get().getEnglish();
 		
-//		japaneseMax.ifPresent(System.out::println);
+//		System.out.println(nameMax);
 //		System.out.println(mathMax);
 //		System.out.println(englishMax);
 //		System.out.println(nameMaxDegit);
+		
+		// TODO: フォーマットして出力する
 		
 		System.out.println(TITLE1);
 		for(Student st : sortedRanking) {
