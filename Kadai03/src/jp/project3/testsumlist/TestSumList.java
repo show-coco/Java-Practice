@@ -11,8 +11,17 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class TestSumList {
+	public static final int ABNORMAL = -1;
+	public static final int NORMAL = 1;
+	public static final int NAME_INDEX = 0;
+	public static final int JAPANESE_INDEX = 1;
+	public static final int MATH_INDEX = 1;
+	public static final int ENGLISH_INDEX = 1;
+	public static final String TITLE1 = "[順位]";
+	public static final String TITLE2 = "[再試験者]";
 	public static final String PATH = "/Users/sakaishow/workspace/test.txt";
 	public static final String CHAR_CODE = "UTF-8";
+	public static final String REMOVE_REGEX = "[\\s　]";
 	
 	public static void main(String[] args) { 
 		List<String[]> lines = new ArrayList<String[]>();
@@ -22,18 +31,23 @@ public class TestSumList {
 		try {
 			// ファイルを読み込み「,」で区切り文字列配列のリストを生成
 			lines = Files.lines(Path.of(PATH), Charset.forName(CHAR_CODE))
-					.map(s -> s.replaceAll("[\\s　]", ""))
+					.map(s -> s.replaceAll(REMOVE_REGEX, ""))
 					.map(s -> s.split(","))
 					.collect(Collectors.toList());
 		} catch (IOException e) {
-			System.exit(-1);
+			System.exit(ABNORMAL);
 		}
 		
 		// 順位リストと、再試験者リストに生徒を格納
 		for (String line[] : lines) {
 			try {
 				// 成績情報を持った生徒を生成
-				Student st = new Student(line[0], Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3]));
+				Student st = new Student(
+						line[NAME_INDEX], 
+						Integer.parseInt(line[JAPANESE_INDEX]), 
+						Integer.parseInt(line[MATH_INDEX]), 
+						Integer.parseInt(line[ENGLISH_INDEX])
+						);
 				if (st.isRetest()) { 
 					retesters.add(st); // 再試験者リストへ格納
 				} else {
@@ -49,23 +63,24 @@ public class TestSumList {
 									.collect(Collectors.toList());
 
 		// それぞれの最大得点の桁取得
-		Optional<Integer> japaneseMax = sortedRanking.stream().map(st -> st.getName().length()).max(Comparator.comparingInt(a -> a));
+		Optional<Integer> nameMax = sortedRanking.stream().map(st -> st.getName().length()).max(Comparator.comparingInt(a -> a));
+		int japaneseMax = sortedRanking.stream().max(Comparator.comparing(Student::getJapanese)).get().getJapanese();
 		int mathMax= sortedRanking.stream().max(Comparator.comparing(Student::getMath)).get().getMath();
 		int englishMax = sortedRanking.stream().max(Comparator.comparing(Student::getEnglish)).get().getEnglish();
 		
-		japaneseMax.ifPresent(System.out::println);
-		System.out.println(mathMax);
-		System.out.println(englishMax);
+//		japaneseMax.ifPresent(System.out::println);
+//		System.out.println(mathMax);
+//		System.out.println(englishMax);
 //		System.out.println(nameMaxDegit);
 		
-		System.out.println("[順位]");
+		System.out.println(TITLE1);
 		for(Student st : sortedRanking) {
 			System.out.print(st.getName() + ", ");
 			System.out.print(st.getSum() + ", ");
 			System.out.println(st.isRetest());
 		}
 		
-		System.out.println("[再試験者]");
+		System.out.println(TITLE2);
 		for(Student st : retesters) {
 			System.out.print(st.getName() + ", ");
 			System.out.print(st.getSum() + ", ");
