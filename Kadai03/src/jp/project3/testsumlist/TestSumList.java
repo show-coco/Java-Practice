@@ -7,21 +7,28 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class TestSumList {
 	public static final int ABNORMAL = -1;
 	public static final int NORMAL = 1;
 	public static final int NAME_INDEX = 0;
 	public static final int JAPANESE_INDEX = 1;
-	public static final int MATH_INDEX = 1;
-	public static final int ENGLISH_INDEX = 1;
-	public static final String TITLE1 = "[順位]";
-	public static final String TITLE2 = "[再試験者]";
+	public static final int MATH_INDEX = 2;
+	public static final int ENGLISH_INDEX = 3;
+	public static final String ASTA = "*";
+	public static final String TITLE1 = "【試験成績順位】";
+	public static final String TITLE2 = "【再試験者】";
 	public static final String PATH = "/Users/sakaishow/workspace/test.txt";
 	public static final String CHAR_CODE = "UTF-8";
 	public static final String REMOVE_REGEX = "[\\s　]";
+	public static final String F001 = "%";
+	public static final String F002 = "d";
+	public static final String F003 = "%-";
+	public static final String F004 = "s";
+	public static final String F005 = "\n";
+	public static final String F006 = "　%s";
 	
 	public static void main(String[] args) { 
 		List<String[]> lines = new ArrayList<String[]>();
@@ -40,26 +47,22 @@ public class TestSumList {
 		
 		// 順位リストと、再試験者リストに生徒を格納
 		for (String line[] : lines) {
-			try {
-				// 成績情報を持った生徒を生成
-				Student st = new Student(
-						line[NAME_INDEX], 
-						Integer.parseInt(line[JAPANESE_INDEX]), 
-						Integer.parseInt(line[MATH_INDEX]), 
-						Integer.parseInt(line[ENGLISH_INDEX])
-						);
-				if (st.isRetest()) {
-					retesters.add(st); // 再試験者リストへ格納
-				} else {
-					ranking.add(st);  // 順位リストへ格納		
-				}
-			} catch(NumberFormatException | ArrayIndexOutOfBoundsException e) {
-				continue; // 不正なデータがあったらスキップ
+			// 成績情報を持った生徒を生成
+			if(!validation(line)) continue;
+			Student st = new Student(line[NAME_INDEX], 
+					Integer.parseInt(line[JAPANESE_INDEX]), 
+					Integer.parseInt(line[MATH_INDEX]), 
+					Integer.parseInt(line[ENGLISH_INDEX])
+					);
+			if (st.isRetest()) {
+				retesters.add(st); // 再試験者リストへ格納
 			}
+			ranking.add(st);  // 順位リストへ格納
 		}
 		
 		List<Student> sortedRanking = ranking.stream()
-									.sorted(Comparator.comparing(Student::getSum).reversed())
+									.sorted(Comparator.comparing(Student::getSum).reversed()
+											.thenComparing(Student::getName))
 									.collect(Collectors.toList());
 
 		// それぞれの最大得点の桁取得
@@ -68,26 +71,46 @@ public class TestSumList {
 		int mathMax= sortedRanking.stream().max(Comparator.comparing(Student::getMath)).get().getMath();
 		int englishMax = sortedRanking.stream().max(Comparator.comparing(Student::getEnglish)).get().getEnglish();
 		
-//		System.out.println(nameMax);
-//		System.out.println(mathMax);
-//		System.out.println(englishMax);
-//		System.out.println(nameMaxDegit);
+		String Format = F001 + String.valueOf(sortedRanking.size()).length() + F002 + " " + 
+						F003 + nameMax + F004 + 
+						F006 + F001 + String.valueOf(japaneseMax).length() + F002 + 
+						F006 + F001 + String.valueOf(mathMax).length()+ F002 + 
+						F006 + F001 + String.valueOf(englishMax).length() + F002 + F005;
 		
-		// TODO: フォーマットして出力する
-		
-		System.out.println(TITLE1);
-		for(Student st : sortedRanking) {
-			System.out.print(st.getName() + ", ");
-			System.out.print(st.getSum() + ", ");
-			System.out.println(st.isRetest());
+		// 試験成績順位を表示
+		if(sortedRanking.size() != 0) {
+			System.out.println(TITLE1);
+			String japaneseAsta = " ";
+			String mathAsta = " ";
+			String englishAsta = " ";
+			int preSum = 0;
+			int rank = 0;
+			for(Student st : sortedRanking) {
+				if(st.getJapanese() == japaneseMax) japaneseAsta = ASTA;
+				if(st.getMath() == mathMax) 		mathAsta = ASTA;
+				if(st.getEnglish() == englishMax) 	englishAsta = ASTA;
+				if(preSum != st.getSum()) 			rank++;
+				preSum = st.getSum();
+				System.out.printf(Format, rank, st.getName(), japaneseAsta, st.getJapanese(), mathAsta, st.getMath(),englishAsta, st.getEnglish());
+				japaneseAsta = " ";
+				mathAsta = " ";
+				englishAsta = " ";
+			}
 		}
-		
-		System.out.println(TITLE2);
-		for(Student st : retesters) {
-			System.out.print(st.getName() + ", ");
-			System.out.print(st.getSum() + ", ");
-			System.out.println(st.isRetest());
+
+		// 再試験者を表示
+		if(retesters.size() != 0) {
+			System.out.println(TITLE2);
+			for(Student st : retesters) {
+				System.out.println(st.getName());
+			}
 		}
-		
+	}
+	
+	static boolean validation(String line[]) {
+		for(String w : line) {
+			if(w.matches("^0.+")) return false; 
+		}
+		return true;
 	}
 }

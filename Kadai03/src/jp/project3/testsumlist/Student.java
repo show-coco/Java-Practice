@@ -44,19 +44,18 @@ public class Student {
 	}
 
 
-	public int getRank() {
-		return rank;
-	}
-
-
 	public boolean isRetest() {
 		return isRetest;
+	}
+	
+	public void setRank(int rank) {
+		this.rank = rank;
 	}
 
 
 	int calcSum(int japanese, int math, int english) {
 		int sum = 0;
-		if(japanese == -1) { 
+		if(japanese == -1) {
 			sum += 0;
 		} else {
 			sum += japanese;
