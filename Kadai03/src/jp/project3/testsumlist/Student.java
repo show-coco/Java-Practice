@@ -6,7 +6,6 @@ public class Student {
 	int 	math;
 	int 	english;
 	int		sum;
-	int 	rank;
 	boolean	isRetest;
 	
 	public Student(String name, int japanese, int math, int english) {
@@ -46,10 +45,6 @@ public class Student {
 
 	public boolean isRetest() {
 		return isRetest;
-	}
-	
-	public void setRank(int rank) {
-		this.rank = rank;
 	}
 
 

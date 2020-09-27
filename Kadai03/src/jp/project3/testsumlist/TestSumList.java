@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class TestSumList {
 	public static final int ABNORMAL = -1;
@@ -35,6 +34,19 @@ public class TestSumList {
 		List<Student> ranking = new ArrayList<Student>();
 		List<Student> retesters = new ArrayList<Student>();
 		
+		/**
+		 ファイルを読み込み「,」で区切り文字列配列のリストを生成
+		 各文字列配列のリスト(ファイルの行)から成績情報を持った生徒を生成。数値がなかったりゼロから始まる数字がある行はスキップ
+		 再試験がtrueだったら生徒を再試験者リストへ格納
+		 生徒を順位リストへ格納
+		 順位リストを合計点でソートする。合計点が一緒だったら名前でソート
+		 名前の最大桁取得
+		 各教科の最大得点取得
+		 試験成績順位出力のためのFORMATを定義
+		 試験成績順位を表示
+		 再試験者を表示
+		 */
+		
 		try {
 			// ファイルを読み込み「,」で区切り文字列配列のリストを生成
 			lines = Files.lines(Path.of(PATH), Charset.forName(CHAR_CODE))
@@ -48,29 +60,32 @@ public class TestSumList {
 		// 順位リストと、再試験者リストに生徒を格納
 		for (String line[] : lines) {
 			// 成績情報を持った生徒を生成
-			if(!validation(line)) continue;
+			if(!validation(line)) continue; // ゼロから始まる数字がある行はスキップ
 			Student st = new Student(line[NAME_INDEX], 
 					Integer.parseInt(line[JAPANESE_INDEX]), 
 					Integer.parseInt(line[MATH_INDEX]), 
 					Integer.parseInt(line[ENGLISH_INDEX])
 					);
-			if (st.isRetest()) {
-				retesters.add(st); // 再試験者リストへ格納
+			if (st.isRetest()) { 	// 再試験がtrueだったら
+				retesters.add(st); 	// 再試験者リストへ格納
 			}
 			ranking.add(st);  // 順位リストへ格納
 		}
 		
+		// 合計点でソートする。合計点が一緒だったら名前でソート
 		List<Student> sortedRanking = ranking.stream()
 									.sorted(Comparator.comparing(Student::getSum).reversed()
 											.thenComparing(Student::getName))
 									.collect(Collectors.toList());
 
-		// それぞれの最大得点の桁取得
+		// 名前の最大桁取得
 		int nameMax = sortedRanking.stream().map(Student::getName).max(Comparator.comparing(String::length)).get().length();
+		// 各教科の最大得点取得
 		int japaneseMax = sortedRanking.stream().max(Comparator.comparing(Student::getJapanese)).get().getJapanese();
 		int mathMax= sortedRanking.stream().max(Comparator.comparing(Student::getMath)).get().getMath();
 		int englishMax = sortedRanking.stream().max(Comparator.comparing(Student::getEnglish)).get().getEnglish();
 		
+		// 試験成績順位出力のためのFORMATを定義
 		String Format = F001 + String.valueOf(sortedRanking.size()).length() + F002 + " " + 
 						F003 + nameMax + F004 + 
 						F006 + F001 + String.valueOf(japaneseMax).length() + F002 + 
