@@ -1,10 +1,10 @@
 package iterator;
 
 public class MyTeacher extends Teacher {
-	StudentList studentList;
+	MyStudentList studentList;
 	
 	public void createStudentList() {
-		studentList = new StudentList(5);
+		studentList = new MyStudentList(5);
 		studentList.add(new Student("赤井亮太", 1));
 		studentList.add(new Student("赤羽里美", 0));
 		studentList.add(new Student("岡田美央", 0));
@@ -13,9 +13,9 @@ public class MyTeacher extends Teacher {
 	}
 	
 	public void callStudents() {
-		int last = studentList.getLastNum();
-		for(int i=0; i<last; i++) {
-			System.out.println(studentList.getStudentAt(i).getName());
+		Iterator itr = studentList.iterator();
+		while(itr.hasNext()) {
+			System.out.println(((Student)itr.next()).getName());
 		}
 	}
 }
