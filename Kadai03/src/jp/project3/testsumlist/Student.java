@@ -1,12 +1,12 @@
 package jp.project3.testsumlist;
 
 public class Student {
-	String 	name;
-	int 	japanese;
-	int 	math;
-	int 	english;
-	int		sum;
-	boolean	isRetest;
+	private String 	name;
+	private int 	japanese;
+	private int 	math;
+	private int 	english;
+	private int		sum;
+	private boolean	isRetest;
 	
 	public Student(String name, int japanese, int math, int english) {
 		this.name = name;
