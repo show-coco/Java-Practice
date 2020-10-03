@@ -24,7 +24,6 @@ public class TestSumList {
 	public static void main(String[] args) {
 		Teacher teacher = new Teacher();
 		teacher.createStudentList(PATH);
-		teacher.ranking.sort();
 		teacher.outRanking();
 		teacher.outRetertes();
 	}

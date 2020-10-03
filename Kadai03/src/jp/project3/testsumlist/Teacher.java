@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Teacher {
 	StudentList ranking;
@@ -18,12 +19,11 @@ public class Teacher {
 		ranking = new StudentList();
 		retesters = new StudentList();
 
-		try {
-			// ファイルを読み込み「,」で区切り文字列配列のリストを生成
-			lines = Files.lines(Path.of(filePath), Charset.forName(TestSumList.CHAR_CODE))
-					.filter(s -> s.matches("[^,]*(,-1|,0|,[1-9][0-9]|,100){3}"))
-					.map(s -> s.split(","))
-					.collect(Collectors.toList());
+		// ファイルを読み込み「,」で区切り文字列配列のリストを生成
+		try(Stream<String[]> str = Files.lines(Path.of(filePath), Charset.forName(TestSumList.CHAR_CODE))
+				.filter(s -> s.matches("[^,]*(,-1|,0|,[1-9][0-9]|,100){3}"))
+				.map(s -> s.split(",")); ) {
+			lines = str.collect(Collectors.toList());
 		} catch (IOException e) {
 			System.out.println(e);
 			System.exit(TestSumList.ABNORMAL);
@@ -43,6 +43,8 @@ public class Teacher {
 			}
 			ranking.add(st);  // 順位リストへ格納
 		}
+		
+		ranking.sort();
 	}
 	
 	public void outRanking() {		
@@ -89,13 +91,16 @@ public class Teacher {
 	public void outRetertes() {
 		System.out.println("");
 		System.out.println(TestSumList.TITLE2);
-		Iterator<Student> itr = retesters.iterator();
-		if(retesters.size() != 0) {
-			while(itr.hasNext()) {
-				System.out.println(itr.next().getName());
-			}
-		} else {
-			System.out.println("該当者なし");
-		}
+		StringBuilder msg = new StringBuilder();
+		retesters.stream()
+		  .map(Student::getName)
+		  .forEach(name -> {
+		    msg.append(name);
+		    msg.append("\n");
+		  });
+
+		String msgStr = msg.length() == 0 ? "該当者なし" : msg.toString();
+
+		System.out.println(msgStr);
 	}
 }
