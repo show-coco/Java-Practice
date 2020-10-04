@@ -25,32 +25,32 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TestSumList {
-	public static final int NORMAL = 1;
-	public static final int ABNORMAL = -1;
-	public static final int NAME_INDEX = 0;
-	public static final int JAPANESE_INDEX = 1;
-	public static final int MATH_INDEX = 2;
-	public static final int ENGLISH_INDEX = 3;
-	public static final String E001 = "入出力エラーが発生しました";
-	public static final String I001 = "[試験成績順位]";
-	public static final String I002 = "[再試験者]";
-	public static final String I003 = "該当者なし";
-	public static final String PATH = "/Users/sakaishow/workspace/testsum.txt";
-	public static final String CHAR_CODE = "MS932";
-	public static final String ASTA = "*";
-	public static final String SPACE = " ";	
-	public static final String REMOVE_REGEX = "[\\s　]";
-	public static final String SPLIT_REGEX = ",";
-	public static final String VALID_REGEX = "[^,]*(,-1|,0|,[1-9][0-9]|,100){3}";
-	public static final String F001 = "%";
-	public static final String F002 = "d";
-	public static final String F003 = "%-";
-	public static final String F004 = "s";
-	public static final String F005 = "\n";
-	public static final String F006 = "　%s";
+	public static final int NORMAL = 1;		// 正常終了
+	public static final int ABNORMAL = -1;	// 異常終了
+	public static final int NAME_INDEX = 0;	// 名前が格納されるINDEX
+	public static final int JAPANESE_INDEX = 1; // 国語の点数が格納されるINDEX
+	public static final int MATH_INDEX = 2;		// 数学の点数が格納されるINDEX
+	public static final int ENGLISH_INDEX = 3;	// 英語の点数が格納されるINDEX
+	public static final String E001 = "入出力エラーが発生しました";	// IOExceptionのエラメッセージ
+	public static final String I001 = "[試験成績順位]";		// 試験成績順位者を表示する時のタイトル
+	public static final String I002 = "[再試験者]";			// 再試験者を表示する時のタイトル
+	public static final String I003 = "該当者なし";			// 再試験者がいなかった場合に出力する文字列
+	public static final String PATH = "/Users/sakaishow/workspace/testsum.txt";	// ファイルのパス
+	public static final String CHAR_CODE = "MS932";	// ファイルの文字コード
+	public static final String ASTA = "*";	// 最高点につける文字
+	public static final String SPACE = " ";		// 最高点ではなかった場合につける文字
+	public static final String SPLIT_REGEX = ",";	// CSV形式のファイルを区切る文字
+	public static final String SKIP_REGEX = "^0.+";	// ゼロから始まる点数にマッチする正規表現のための文字列
+	public static final String VALID_REGEX = "[^,]*(,-1|,0|,[1-9][0-9]|,100){3}";	// ファイルの列が正しい入力値の場合にマッチする正規表現のための文字列
+	public static final String F001 = "%";	// 表示用書式1
+	public static final String F002 = "d";	// 表示用書式2
+	public static final String F003 = "%-";	// 表示用書式3
+	public static final String F004 = "s";	// 表示用書式4
+	public static final String F005 = "\n";	// 表示用書式5
+	public static final String F006 = "　%s";	// 表示用書式6
 	
-	static List<Student> ranking = new ArrayList<Student>();
-	static List<Student> retesters = new ArrayList<Student>();
+	static List<Student> ranking = new ArrayList<Student>(); 	// 試験成績順位に表示する生徒を格納するリスト
+	static List<Student> retesters = new ArrayList<Student>();	// 再試験者を格納するリスト
 
 	public static void main(String[] args) {
 		List<String[]> lines = new ArrayList<String[]>();
@@ -69,7 +69,7 @@ public class TestSumList {
 		// 順位リストと、再試験者リストに生徒を格納
 		for (String line[] : lines) {
 			for(String w : line) {
-				if(w.matches("^0.+")) continue;   // ゼロから始まる点数がある行はスキップ
+				if(w.matches("")) continue;   // ゼロから始まる点数がある行はスキップ
 			}
 			Student st = new Student(line[NAME_INDEX], // 成績情報を持った生徒を生成
 					Integer.parseInt(line[JAPANESE_INDEX]),
