@@ -5,12 +5,14 @@
  * 　概要：			各生徒を合計点の降順(合計が同じなら名前の昇順)に並び替え、順位、名前、点数、点数、点数
  * 					の順番で出力する。
  * 　作成日付：		2020/9/30
- * 　版数：			1.2版
+ * 　版数：			1.3版
  * 　作成者(班:PL)：坂井 晶(3:秦　和也)
  * 　修正履歴：		1.1版 最大値取得の効率向上
  * 　備考：			なし
  * 　修正履歴： 		1.2版 再試験者表示の効率向上
  * 　備考：			StringBuilderを使用
+ * 　修正履歴： 		1.3版 保守性向上
+ * 　備考：			教科数が増えても容易に変更できるように修正
  * 　課題No：			3
  **************************************************************************************************/
 package jp.project3.testsumlist;
@@ -27,10 +29,14 @@ import java.util.stream.Collectors;
 public class TestSumList {
 	public static final int NORMAL = 1;		// 正常終了
 	public static final int ABNORMAL = -1;	// 異常終了
+	public static final int ZERO = 0;	// ゼロ
+	public static final int NEGATIVE = -1;	// マイナス1
+	public static final int ONE = 1;	// マイナス1
 	public static final int NAME_INDEX = 0;	// 名前が格納されるINDEX
 	public static final int JAPANESE_INDEX = 1; // 国語の点数が格納されるINDEX
 	public static final int MATH_INDEX = 2;		// 数学の点数が格納されるINDEX
 	public static final int ENGLISH_INDEX = 3;	// 英語の点数が格納されるINDEX
+	public static final int RED_SCORE = 25;	// この点数以下が欠点になる
 	public static final String E001 = "入出力エラーが発生しました";	// IOExceptionのエラメッセージ
 	public static final String I001 = "[試験成績順位]";		// 試験成績順位者を表示する時のタイトル
 	public static final String I002 = "[再試験者]";			// 再試験者を表示する時のタイトル
@@ -40,7 +46,6 @@ public class TestSumList {
 	public static final String ASTA = "*";	// 最高点につける文字
 	public static final String SPACE = " ";		// 最高点ではなかった場合につける文字
 	public static final String SPLIT_REGEX = ",";	// CSV形式のファイルを区切る文字
-	public static final String SKIP_REGEX = "^0.+";	// ゼロから始まる点数にマッチする正規表現のための文字列
 	public static final String VALID_REGEX = "[^,]*(,-1|,0|,[1-9][0-9]|,100){3}";	// ファイルの列が正しい入力値の場合にマッチする正規表現のための文字列
 	public static final String F001 = "%";	// 表示用書式1
 	public static final String F002 = "d";	// 表示用書式2
@@ -68,9 +73,6 @@ public class TestSumList {
 
 		// 順位リストと、再試験者リストに生徒を格納
 		for (String line[] : lines) {
-			for(String w : line) {
-				if(w.matches("")) continue;   // ゼロから始まる点数がある行はスキップ
-			}
 			Student st = new Student(line[NAME_INDEX], // 成績情報を持った生徒を生成
 					Integer.parseInt(line[JAPANESE_INDEX]),
 					Integer.parseInt(line[MATH_INDEX]),
@@ -103,21 +105,19 @@ public class TestSumList {
 		// 試験成績順位を表示
 		if(sortedRanking.size() != 0) {
 			System.out.println(I001);
-			String japaneseAsta = SPACE;
-			String mathAsta = SPACE;
-			String englishAsta = SPACE;
-			int preSum = 0;
-			int rank = 0;
-			int preRank = 0;
+			String japaneseAsta = SPACE, mathAsta = SPACE, englishAsta = SPACE;
+			int preSum = ZERO, rank = ZERO, preRank = ZERO;
+			
 			for(Student st : sortedRanking) {
+				// 生徒の各点数が最大点か判定
 				if(st.getJapanese() == japaneseMax) japaneseAsta = ASTA;
 				if(st.getMath() == mathMax) 		mathAsta = ASTA;
 				if(st.getEnglish() == englishMax) 	englishAsta = ASTA;
 				rank++;
-				if(preSum != st.getSum()) {
+				if(preSum != st.getSum()) { // 前に表示した生徒と点数が違う場合
 					preRank = rank;
 					System.out.printf(Format, rank, st.getName(), japaneseAsta, st.getJapanese(), mathAsta, st.getMath(),englishAsta, st.getEnglish());
-				} else {
+				} else { // 前に表示した生徒と点数が同じ場合
 					System.out.printf(Format, preRank, st.getName(), japaneseAsta, st.getJapanese(), mathAsta, st.getMath(),englishAsta, st.getEnglish());
 				}
 				preSum = st.getSum();

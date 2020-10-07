@@ -36,31 +36,21 @@ public class Student {
 		return isRetest;
 	}
 	
-	int calcSum(int japanese, int math, int english) {
-		int sum = 0;
-		if(japanese == -1) {
-			sum += 0;
-		} else {
-			sum += japanese;
+	int calcSum(int... scores) {
+		// 版数1.3
+		int sum = TestSumList.ZERO;
+		for (int score : scores) {
+			sum += score == TestSumList.NEGATIVE ? TestSumList.ZERO : score;
 		}
-		
-		if(math == -1) {
-			sum += 0;
-		} else {
-			sum += math;
-		}
-		
-		if(english == -1) {
-			sum += 0;
-		} else {
-			sum += english;
-		}
-		
 		return sum; 
 	}
 	
-	boolean judjeIsRetest(int japanese, int math, int english) {
-		if(japanese <= 25 || math <= 25 || english <= 25) return true;
-		return false;
+	boolean judjeIsRetest(int... scores) {
+		// 版数1.3
+		int count = TestSumList.ZERO;
+		for (int score : scores) {
+			count += score <= TestSumList.RED_SCORE ? TestSumList.ONE : TestSumList.ZERO;
+		}
+		return count > TestSumList.ZERO; 
 	}
 }
