@@ -1,0 +1,3 @@
+module UseLib {
+	requires Lib;
+}
