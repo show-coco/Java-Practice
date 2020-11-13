@@ -11,8 +11,6 @@
  * 　備考：			なし
  * 　修正履歴： 		1.2版 再試験者表示の効率向上
  * 　備考：			StringBuilderを使用
- * 　修正履歴： 		1.3版 保守性向上
- * 　備考：			教科数が増えても容易に変更できるように修正
  * 　課題No：			3
  **************************************************************************************************/
 package jp.project3.testsumlist;
@@ -29,19 +27,17 @@ import java.util.stream.Collectors;
 public class TestSumList {
 	public static final int NORMAL = 1;		// 正常終了
 	public static final int ABNORMAL = -1;	// 異常終了
-	public static final int ZERO = 0;	// ゼロ
 	public static final int NEGATIVE = -1;	// マイナス1
-	public static final int ONE = 1;	// マイナス1
-	public static final int NAME_INDEX = 0;	// 名前が格納されるINDEX
-	public static final int JAPANESE_INDEX = 1; // 国語の点数が格納されるINDEX
-	public static final int MATH_INDEX = 2;		// 数学の点数が格納されるINDEX
-	public static final int ENGLISH_INDEX = 3;	// 英語の点数が格納されるINDEX
+	public static final int ZERO = 	0;	// ゼロ
+	public static final int ONE = 	1;	// マイナス1
+	public static final int TWO = 	2;	// 名前が格納されるINDEX
+	public static final int THREE = 3; // 国語の点数が格納されるINDEX
 	public static final int RED_SCORE = 25;	// この点数以下が欠点になる
 	public static final String E001 = "入出力エラーが発生しました";	// IOExceptionのエラメッセージ
 	public static final String I001 = "[試験成績順位]";		// 試験成績順位者を表示する時のタイトル
 	public static final String I002 = "[再試験者]";			// 再試験者を表示する時のタイトル
 	public static final String I003 = "該当者なし";			// 再試験者がいなかった場合に出力する文字列
-	public static final String PATH = "/Users/sakaishow/workspace/testsum.txt";	// ファイルのパス
+	public static final String PATH = "/Users/sakaishow/workspace/testsum2.txt";	// ファイルのパス
 	public static final String CHAR_CODE = "MS932";	// ファイルの文字コード
 	public static final String ASTA = "*";	// 最高点につける文字
 	public static final String SPACE = " ";		// 最高点ではなかった場合につける文字
@@ -73,10 +69,10 @@ public class TestSumList {
 
 		// 順位リストと、再試験者リストに生徒を格納
 		for (String line[] : lines) {
-			Student st = new Student(line[NAME_INDEX], // 成績情報を持った生徒を生成
-					Integer.parseInt(line[JAPANESE_INDEX]),
-					Integer.parseInt(line[MATH_INDEX]),
-					Integer.parseInt(line[ENGLISH_INDEX])
+			Student st = new Student(line[ZERO], // 成績情報を持った生徒を生成
+					Integer.parseInt(line[ONE]),
+					Integer.parseInt(line[TWO]),
+					Integer.parseInt(line[THREE])
 					);
 			if (st.isRetest()) { 	// 再試験がtrueだったら
 				retesters.add(st); 	// 再試験者リストへ格納
