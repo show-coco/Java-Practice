@@ -8,7 +8,7 @@ public class UserApplicationService {
 		this.userService = userService;
 	}
 	
-	public void register(string name) {
+	public void register(String name) {
 		User user = new User(new UserName(name));
 		
 		if (userService.exists(user)) {
