@@ -1,10 +1,10 @@
 package jp.sample.accounting;
 
-public class EmpId {
+public class EmpPassword {
 	private String value;
 
-	public EmpId(String value) {
-		if (value.isEmpty() || value == null) throw new IllegalArgumentException("EmpIdがnullまたは空文字です");
+	public EmpPassword(String value) {
+		if (value != null && value.length() < 8) throw new IllegalArgumentException("パスワードは" + 8 + "文字以上必要です");
 
 		this.value = value;
 	}
@@ -21,16 +21,12 @@ public class EmpId {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		EmpId other = (EmpId) obj;
+		EmpPassword other = (EmpPassword) obj;
 		if (value == null) {
 			if (other.value != null)
 				return false;
 		} else if (!value.equals(other.value))
 			return false;
 		return true;
-	}
-
-	public boolean equals(String target) {
-		return target.equals(value);
 	}
 }

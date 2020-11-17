@@ -1,15 +1,21 @@
 package jp.sample.accounting;
 
 public class EmpName {
-	private String value;
+	private String firstName;
+	private String lastName;
 
-	public EmpName(String value) {
-		if (value == null) throw new NullPointerException(value);
-		if (value.length() < 3) throw new  IllegalArgumentException("ユーザ名は3文字以上です。" + value);
-		if (value.length() > 20) throw new  IllegalArgumentException("ユーザ名は20文字以下です。" + value);
+	public EmpName(String firstName, String lastName) {
+		if (firstName == null || lastName == null || firstName == "" || lastName == "") throw new NullPointerException("名前がnullです");
 
-		this.value = value;
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 
-	public String getValue() { return value; }
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
 }

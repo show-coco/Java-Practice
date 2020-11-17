@@ -2,8 +2,9 @@ package jp.sample.accounting;
 
 import java.util.ArrayList;
 
-public interface IEmployeeRepo {
-	public boolean find(EmpId id);
+public interface IEmpRepo {
 	public void save(Employee employee);
+	public Employee getById(EmpId id);
+	public Employee getByIdPw(EmpId id, EmpPassword pw);
 	public ArrayList<Employee> getAll();
 }
