@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import jp.sample.employee.Employee;
 
 public interface IAttendRepo {
-	void save(AttendanceStatus as);
-	ArrayList<AttendanceStatus> get(Employee emp); 
+	void save(AttendStatus as);
+	ArrayList<AttendStatus> get(Employee emp); 
+	AttendStatus get(Employee emp, String time, int type); 
 }

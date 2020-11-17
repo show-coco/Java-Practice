@@ -1,9 +1,10 @@
 
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import jp.sample.attendance.AttendanceApplicationService;
-import jp.sample.attendance.AttendanceStatus;
+import jp.sample.attendance.AttendStatus;
 import jp.sample.attendance.IAttendRepo;
 import jp.sample.attendance.InMemoryAttendRepo;
 import jp.sample.employee.EmpService;
@@ -21,6 +22,8 @@ public class Main {
 		
 		IAttendRepo attendRepo = new InMemoryAttendRepo();
 		AttendanceApplicationService attendApp = new AttendanceApplicationService(attendRepo);
+
+		/**************** 社員サンプル *****************/
 
 		// 社員を登録
 		try {
@@ -42,12 +45,25 @@ public class Main {
 			System.out.println(e);
 		}
 		
-		// 出勤
+		/**************** 出退勤サンプル *****************/
+		
+		// emp1が出勤
 		attendApp.attend(emp1, 1);
-		// 出退勤状況取得
-		ArrayList<AttendanceStatus> as = attendApp.get(emp1);
+		// emp1の出退勤状況取得
+		ArrayList<AttendStatus> as = attendApp.get(emp1);
 		// 出退勤状況表示
 		as.forEach(a -> System.out.println(a.toString()));
-		
+
+		// emp1の特定の出勤況取得
+		AttendStatus as1 = attendApp.get(emp1, "2020/11/17", 1);
+		// as1の出勤時間を変更
+		try {
+			attendApp.setTime(as1, "22:30");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		// 変更後の出退勤状況取得 
+		as.forEach(a -> System.out.println(a.toString()));
 	}
 }
