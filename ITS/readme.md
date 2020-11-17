@@ -34,6 +34,18 @@
 社員はパスワードや社員ID, 性別などの値(値オブジェクト)を保持しています。そして、社員は生成、変更、削除のライフサイクルがあり、「変更」の部分で値を変更することができます。
 
 例:
-- [社員](https://github.com/show-coco/Java-Practice/blob/master/ITS/src/domain/employee/Employee.java)
-- [出退勤状況](https://github.com/show-coco/Java-Practice/blob/master/ITS/src/domain/attend/AttendStatus.java)
+- [社員エンティティ](https://github.com/show-coco/Java-Practice/blob/master/ITS/src/domain/employee/Employee.java)
+- [出退勤状況エンティティ](https://github.com/show-coco/Java-Practice/blob/master/ITS/src/domain/attend/AttendStatus.java)
+
+# ドメインサービス
+
+ドメインサービスはドメインオブジェクトに関する処理の不自然さを解消します。
+
+たとえば、同じ社員IDが既に存在するかを確認する処理を実装するとします。これが社員エンティティ自体に存在すると不自然です。
+なぜなら、生成した社員エンティティ自身に既に存在するかを聞くことになるからです。これは多くの開発者を混乱させます。
+
+そのため、これをドメインのためのサービスとして外に出してあげます。外に出されたものをドメインサービスとして定義します。
+こうすることで不自然さを解消できます
+
+例: [社員サービス](https://github.com/show-coco/Java-Practice/blob/master/ITS/src/domain/employee/EmpService.java)
 
