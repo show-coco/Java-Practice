@@ -1,6 +1,7 @@
 package jp.sample.attendance;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import jp.sample.employee.Employee;
@@ -12,9 +13,7 @@ public class AttendanceApplicationService {
 		this.attendRepo = attendRepo;
 	}
 
-
-
-	// TODO: 出退勤処理
+	// 出退勤
 	public void attend(Employee emp, int typeId) {
 		// TODO: リファクタリング
 		SimpleDateFormat df1 = new SimpleDateFormat("yyyy/MM/dd");
@@ -28,6 +27,9 @@ public class AttendanceApplicationService {
 		attendRepo.save(as);
 	}
 	
-	// TODO: 出退勤状況の表示
+	// 出退勤状況の取得
+	public ArrayList<AttendanceStatus> get(Employee emp) {
+		return attendRepo.get(emp);
+	}
 	// TODO: 出退勤の変更・登録
 }

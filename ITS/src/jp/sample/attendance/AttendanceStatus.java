@@ -1,7 +1,5 @@
 package jp.sample.attendance;
 
-import java.util.Date;
-
 import jp.sample.employee.Employee;
 
 public class AttendanceStatus {
@@ -15,5 +13,26 @@ public class AttendanceStatus {
 		this.date = date;
 		this.typeId = typeId;
 		this.time = time;
-	}	
+	}
+	
+	public Employee getEmp() {
+		return emp;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public int getTypeId() {
+		return typeId;
+	}
+
+	public String getTime() {
+		return time;
+	}
+	
+	@Override
+	public String toString() {
+		return "AttendanceStatus [emp=" + emp.getId().getValue() + ", date=" + date + ", typeId=" + typeId + ", time=" + time + "]";
+	}
 }
