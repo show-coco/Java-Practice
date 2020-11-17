@@ -1,6 +1,6 @@
-package jp.sample.attendance;
+package attendance;
 
-import jp.sample.employee.Employee;
+import employee.Employee;
 
 public class AttendStatus {
 	private Employee emp;

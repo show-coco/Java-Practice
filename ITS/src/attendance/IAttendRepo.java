@@ -1,8 +1,8 @@
-package jp.sample.attendance;
+package attendance;
 
 import java.util.ArrayList;
 
-import jp.sample.employee.Employee;
+import employee.Employee;
 
 public interface IAttendRepo {
 	void save(AttendStatus as);

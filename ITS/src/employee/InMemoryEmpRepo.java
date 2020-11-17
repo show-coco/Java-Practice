@@ -1,4 +1,4 @@
-package jp.sample.employee;
+package employee;
 
 import java.util.ArrayList;
 

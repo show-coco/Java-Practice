@@ -1,4 +1,4 @@
-package jp.sample.employee;
+package employee;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

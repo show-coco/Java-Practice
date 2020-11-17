@@ -1,9 +1,9 @@
-package jp.sample.attendance;
+package attendance;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-import jp.sample.employee.Employee;
+import employee.Employee;
 
 public class InMemoryAttendRepo implements IAttendRepo {
 	private ArrayList<AttendStatus> AttendStatuses = new ArrayList<>();

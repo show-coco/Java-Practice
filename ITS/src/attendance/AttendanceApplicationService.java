@@ -1,11 +1,11 @@
-package jp.sample.attendance;
+package attendance;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import jp.sample.employee.Employee;
+import employee.Employee;
 
 public class AttendanceApplicationService {
 	private IAttendRepo attendRepo;
@@ -37,7 +37,7 @@ public class AttendanceApplicationService {
 		return attendRepo.get(emp, date, type);
 	}
 
-	// 出退勤の変更・登録
+	// 出退勤の変更・登録 
 	public void setTime(AttendStatus attendStatus, String time) throws ParseException {
 		SimpleDateFormat tf = new SimpleDateFormat("HH:mm");
 		Date newTime = new Date();

@@ -1,4 +1,4 @@
-package jp.sample.employee;
+package employee;
 
 public class EmpService {
 	IEmpRepo employeeRepo; 
