@@ -4,7 +4,8 @@ public class EmpPassword {
 	private String value;
 
 	public EmpPassword(String value) {
-		if (value != null && value.length() < 8) throw new IllegalArgumentException("パスワードは" + 8 + "文字以上必要です");
+		if (value == null) throw new NullPointerException("パスワードがnullです");
+		if (value.length() < 8) throw new IllegalArgumentException("パスワードは" + 8 + "文字以上必要です");
 
 		this.value = value;
 	}

@@ -27,17 +27,17 @@ public class EmployeeApplicationService {
 		this.empService = employeeService;
 	}
 	
-	public void register(String firstName, String lastName, String mailAddress, int genderId, String birthDayStr, String phoneNumber, String address) {
+	public void register(String firstName, String lastName, String mailAddress, int genderId, String birthDayStr, String phoneNumber, String pw, String address) {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 		Date birthDay = new Date();
+
 		try {
-			
 			birthDay = df.parse(birthDayStr);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 
-		Employee employee = empFactory.create(new EmpName(firstName, lastName), new MailAddress(mailAddress), new Gender(genderId), birthDay, new PhoneNumber(phoneNumber), null, address);
+		Employee employee = empFactory.create(new EmpName(firstName, lastName), new MailAddress(mailAddress), new Gender(genderId), birthDay, new PhoneNumber(phoneNumber), new EmpPassword(pw), address);
 		
 		if (empService.exists(employee)) {
 			throw new IllegalArgumentException(employee.getId().getValue() + "は既に存在しています");

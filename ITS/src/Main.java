@@ -27,8 +27,8 @@ public class Main {
 
 		// 社員を登録
 		try {
-			empApp.register("Sho", "Sakai", "show@example.com", 1, "2000/7/1", "023-4567-8912", "広島");
-			empApp.register("Mao", "Sakai", "mao@example.com", 1, "2020/7/1", "023-4567-8912", "山口");
+			empApp.register("Sho", "Sakai", "show@example.com", 1, "2000/7/1", "023-4567-8912", "password", "広島");
+			empApp.register("Taka", "Sakai", "mao@example.com", 1, "2020/7/1", "023-4567-8912", "password", "山口");
 		} catch(Exception e) {
 			System.out.println(e);
 		}
@@ -43,6 +43,13 @@ public class Main {
 			empApp.changeName(emp1, "Taka", "Hashi");
 		} catch(Exception e) {
 			System.out.println(e);
+		}
+		
+		// ログイン
+		if (empApp.login(1, "password")) {
+			System.out.println("ログインに成功しました");
+		} else {
+			System.out.println("ログインに失敗しました");
 		}
 		
 		/**************** 出退勤サンプル *****************/
