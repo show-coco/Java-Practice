@@ -47,7 +47,7 @@
 そのため、これをドメインのためのサービスとして外に出してあげます。外に出されたものをドメインサービスとして定義します。
 こうすることで不自然さを解消できます
 
-例: [社員サービス](https://github.com/show-coco/Java-Practice/blob/master/ITS/src/domain/employee/EmpService.java)
+例: [社員のドメインサービス](https://github.com/show-coco/Java-Practice/blob/master/ITS/src/domain/employee/EmpService.java)
 
 # リポジトリ
 
@@ -55,5 +55,15 @@
 
 例: 
 - [社員リポジトリ](https://github.com/show-coco/Java-Practice/blob/master/ITS/src/repository/employee/InMemoryEmpRepo.java)
-- [出退勤状況リポジトリ](https://github.com/show-coco/Java-Practice/blob/master/ITS/src/repository/attend/InMemoryAttendRepo.java)
+- [出退勤リポジトリ](https://github.com/show-coco/Java-Practice/blob/master/ITS/src/repository/attend/InMemoryAttendRepo.java)
+
+# アプリケーションサービス
+
+アプリケーションサービスではユースケースを実装します。
+
+社員のアプリケーションサービスでは登録・更新・詳細取得・一覧取得などがあります。これらをエンティティ, ドメインサービス, リポジトリから構成します。
+
+例:
+- [社員のアプリケーションサービス](https://github.com/show-coco/Java-Practice/blob/master/ITS/src/application/EmployeeApplicationService.java)
+- [出退勤のアプリケーションサービス](https://github.com/show-coco/Java-Practice/blob/master/ITS/src/application/AttendanceApplicationService.java)
 
