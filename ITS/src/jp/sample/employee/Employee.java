@@ -1,4 +1,4 @@
-package jp.sample.accounting;
+package jp.sample.employee;
 
 import java.util.Date;
 
@@ -12,6 +12,17 @@ public class Employee {
 	private EmpPassword password;
 	private String address;
 
+	/**
+	 * 社員を新規作成するときのコンストラクタ
+	 * @param id
+	 * @param name
+	 * @param mailAddress
+	 * @param jenderId
+	 * @param birthDay
+	 * @param phoneNumber
+	 * @param password
+	 * @param address
+	 */
 	public Employee(EmpId id, EmpName name, MailAddress mailAddress, Gender jenderId, Date birthDay,
 			PhoneNumber phoneNumber, EmpPassword password, String address) {
 		this.id = id;
@@ -60,11 +71,11 @@ public class Employee {
 		return address;
 	}
 
-	public void setName(EmpName name) {
+	void setName(EmpName name) {
 		this.name = name;
 	}
 	
-	public void setPassword(EmpPassword password) {
+	void setPassword(EmpPassword password) {
 		this.password = password;
 	}
 	

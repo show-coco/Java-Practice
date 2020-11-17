@@ -1,4 +1,4 @@
-package jp.sample.accounting;
+package jp.sample.employee;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -6,15 +6,17 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class EmployeeApplicationService {
+	private IEmpFactory empFactory;
 	private IEmpRepo empRepo;
 	private EmpService empService;
 
-	public EmployeeApplicationService(IEmpRepo employeeRepo, EmpService employeeService) {
+	public EmployeeApplicationService(IEmpFactory empFactory, IEmpRepo employeeRepo, EmpService employeeService) {
+		this.empFactory = empFactory;
 		this.empRepo = employeeRepo;
 		this.empService = employeeService;
 	}
 	
-	public void register(String id, String firstName, String lastName, String mailAddress, int genderId, String birthDayStr, String phoneNumber, String address) {
+	public void register(String firstName, String lastName, String mailAddress, int genderId, String birthDayStr, String phoneNumber, String address) {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 		Date birthDay = new Date();
 		try {
@@ -23,7 +25,7 @@ public class EmployeeApplicationService {
 			e.printStackTrace();
 		}
 
-		Employee employee = new Employee(new EmpId(id), new EmpName(firstName, lastName), new MailAddress(mailAddress), new Gender(genderId), birthDay, new PhoneNumber(phoneNumber), null, address);
+		Employee employee = empFactory.create(new EmpName(firstName, lastName), new MailAddress(mailAddress), new Gender(genderId), birthDay, new PhoneNumber(phoneNumber), null, address);
 		
 		if (empService.exists(employee)) {
 			throw new IllegalArgumentException(employee.getId().getValue() + "は既に存在しています");
@@ -32,7 +34,7 @@ public class EmployeeApplicationService {
 		empRepo.save(employee);
 	}
 	
-	public Employee get(String id) {
+	public Employee get(int id) {
 		return empRepo.getById(new EmpId(id));
 	}
 	
@@ -50,7 +52,7 @@ public class EmployeeApplicationService {
 		empRepo.save(employee);
 	}
 	
-	public boolean login(String id, String pw) {
+	public boolean login(int id, String pw) {
 		Employee emp = empRepo.getByIdPw(new EmpId(id), new EmpPassword(pw));
 		return emp != null;
 	}

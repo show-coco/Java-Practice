@@ -1,4 +1,4 @@
-package jp.sample.accounting;
+package jp.sample.employee;
 
 public class Gender {
 	private int id;
