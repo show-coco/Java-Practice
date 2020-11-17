@@ -49,3 +49,11 @@
 
 例: [社員サービス](https://github.com/show-coco/Java-Practice/blob/master/ITS/src/domain/employee/EmpService.java)
 
+# リポジトリ
+
+リポジトリはエンティティの永続化を担当します。永続化処理をビジネスロジックと一緒に記述してしまうとビジネスロジックがぼやけ、理解し難くなってしまいます。永続化の処理を外に出してあげることで、ビジネスロジックを明確化します
+
+例: 
+- [社員リポジトリ](https://github.com/show-coco/Java-Practice/blob/master/ITS/src/repository/employee/InMemoryEmpRepo.java)
+- [出退勤状況リポジトリ](https://github.com/show-coco/Java-Practice/blob/master/ITS/src/repository/attend/InMemoryAttendRepo.java)
+
