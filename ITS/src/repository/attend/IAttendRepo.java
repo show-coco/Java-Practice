@@ -1,8 +1,9 @@
-package attendance;
+package repository.attend;
 
 import java.util.ArrayList;
 
-import employee.Employee;
+import domain.attend.AttendStatus;
+import domain.employee.Employee;
 
 public interface IAttendRepo {
 	void save(AttendStatus as);

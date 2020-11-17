@@ -1,4 +1,4 @@
-package employee;
+package domain.employee;
 
 import java.util.Date;
 
@@ -71,11 +71,11 @@ public class Employee {
 		return address;
 	}
 
-	void setName(EmpName name) {
+	public void setName(EmpName name) {
 		this.name = name;
 	}
 	
-	void setPassword(EmpPassword password) {
+	public void setPassword(EmpPassword password) {
 		this.password = password;
 	}
 	

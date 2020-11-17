@@ -1,11 +1,13 @@
-package attendance;
+package application;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import employee.Employee;
+import domain.attend.AttendStatus;
+import domain.employee.Employee;
+import repository.attend.IAttendRepo;
 
 public class AttendanceApplicationService {
 	private IAttendRepo attendRepo;

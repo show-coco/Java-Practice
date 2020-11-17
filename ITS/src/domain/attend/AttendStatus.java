@@ -1,6 +1,6 @@
-package attendance;
+package domain.attend;
 
-import employee.Employee;
+import domain.employee.Employee;
 
 public class AttendStatus {
 	private Employee emp;

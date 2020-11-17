@@ -1,6 +1,14 @@
-package employee;
+package factory.employee;
 
 import java.util.Date;
+
+import domain.employee.EmpId;
+import domain.employee.EmpName;
+import domain.employee.EmpPassword;
+import domain.employee.Employee;
+import domain.employee.Gender;
+import domain.employee.MailAddress;
+import domain.employee.PhoneNumber;
 
 public class InMemoryEmpFactory implements IEmpFactory {
 	private int currentId = 0;

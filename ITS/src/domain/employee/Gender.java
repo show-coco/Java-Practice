@@ -1,4 +1,4 @@
-package employee;
+package domain.employee;
 
 public class Gender {
 	private int id;

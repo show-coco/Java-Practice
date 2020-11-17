@@ -1,4 +1,6 @@
-package employee;
+package domain.employee;
+
+import repository.employee.IEmpRepo;
 
 public class EmpService {
 	IEmpRepo employeeRepo; 

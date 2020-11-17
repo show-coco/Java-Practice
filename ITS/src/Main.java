@@ -3,15 +3,15 @@
 import java.text.ParseException;
 import java.util.ArrayList;
 
-import attendance.AttendStatus;
-import attendance.AttendanceApplicationService;
-import attendance.IAttendRepo;
-import attendance.InMemoryAttendRepo;
-import employee.EmpService;
-import employee.Employee;
-import employee.EmployeeApplicationService;
-import employee.InMemoryEmpFactory;
-import employee.InMemoryEmpRepo;
+import application.AttendanceApplicationService;
+import application.EmployeeApplicationService;
+import domain.attend.AttendStatus;
+import domain.employee.EmpService;
+import domain.employee.Employee;
+import factory.employee.InMemoryEmpFactory;
+import repository.attend.IAttendRepo;
+import repository.attend.InMemoryAttendRepo;
+import repository.employee.InMemoryEmpRepo;
 
 public class Main {
 	public static void main(String[] args) {

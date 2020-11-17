@@ -1,9 +1,10 @@
-package attendance;
+package repository.attend;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-import employee.Employee;
+import domain.attend.AttendStatus;
+import domain.employee.Employee;
 
 public class InMemoryAttendRepo implements IAttendRepo {
 	private ArrayList<AttendStatus> AttendStatuses = new ArrayList<>();
