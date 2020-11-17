@@ -4,11 +4,15 @@
 参考: [ドメイン駆動設計入門 ボトムアップでわかる! ドメイン駆動設計の基本](https://www.amazon.co.jp/%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E9%A7%86%E5%8B%95%E8%A8%AD%E8%A8%88%E5%85%A5%E9%96%80-%E3%83%9C%E3%83%88%E3%83%A0%E3%82%A2%E3%83%83%E3%83%97%E3%81%A7%E3%82%8F%E3%81%8B%E3%82%8B-%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E9%A7%86%E5%8B%95%E8%A8%AD%E8%A8%88%E3%81%AE%E5%9F%BA%E6%9C%AC-%E6%88%90%E7%80%AC-%E5%85%81%E5%AE%A3/dp/479815072X/ref=sr_1_1?__mk_ja_JP=%E3%82%AB%E3%82%BF%E3%82%AB%E3%83%8A&dchild=1&keywords=%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E9%A7%86%E5%8B%95%E8%A8%AD%E8%A8%88&qid=1605611496&sr=8-1)
 
 # ドメインオブジェクト 
-[プログラム例](https://github.com/show-coco/Java-Practice/tree/master/ITS/src/domain)<br>
+
+[ディレクトリ](https://github.com/show-coco/Java-Practice/tree/master/ITS/src/domain)<br>
 ドメインオブジェクトには**値オブジェクト**と**エンティティ**が存在します。
 作成する対象物の知識(ドメイン知識)をドメインオブジェクトとしてプログラム化します。
 
 ## 値オブジェクト
+
+値オブジェクトは値をオブジェクトとして表したものです。StringやIntegerのラッパークラスも値オブジェクトに当たります。
+
 例えばこのような仕様があったとします。
 - メールアドレスは必須項目でメールアドレスの形式であること(「@」や「.」が含まれている) 
 - パスワードは必須項目で8文字以上であること
@@ -24,3 +28,12 @@
 値オブジェクトとして定義していれば、生成する際に判定されるので一箇所変更すれば良いことになります。
 
 ## エンティティ
+
+エンティティは値オブジェクトで構成されます。エンティティはライフサイクルを持っていて可変です。社員を例にあげて説明してみます。
+
+社員はパスワードや社員ID, 性別などの値(値オブジェクト)を保持しています。そして、社員は生成、変更、削除のライフサイクルがあり、「変更」の部分で値を変更することができます。
+
+例:
+- [社員](https://github.com/show-coco/Java-Practice/blob/master/ITS/src/domain/employee/Employee.java)
+- [出退勤状況](https://github.com/show-coco/Java-Practice/blob/master/ITS/src/domain/attend/AttendStatus.java)
+
