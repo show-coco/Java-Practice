@@ -55,27 +55,29 @@ public class Main {
 		/**************** 出退勤サンプル *****************/
 		
 		/**** 出退勤ページ ****/
-		// emp1が出勤
-		attendApp.attend(1, 1);
+		// id1の社員が出勤
+		attendApp.attend(1);
+		// id1の社員が退勤
+		attendApp.leave(1);
 		
 		/**** 出退勤状況表示ページ(変更できないページ) ****/
-		// emp1の出退勤状況取得
+		// id1の社員の出退勤状況取得
 		ArrayList<AttendStatus> as1 = attendApp.get(1);
-		// 出退勤状況表示
+		// id1の社員の出退勤状況表示
 		as1.forEach(a -> System.out.println(a.toString()));
 
 		/**** 出退勤状況表示ページ(直変更できるページ) ****/
-		// emp1の出退勤状況取得
+		// id1の社員の出退勤状況取得
 		ArrayList<AttendStatus> as2 = attendApp.get(1);
-		// emp1の特定の出勤況取得
+		// id1の社員の特定の出勤況取得
 		AttendStatus aas = attendApp.get(1, "2020/11/18", 1);
-		// as1の出勤時間を変更
+		// id1の社員の2020/11/18の出勤時間を変更
 		try {
 			attendApp.setTime(aas, "22:30");
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		// 変更後の出退勤状況再表示 
+		// 変更後のid1の社員の出退勤状況再表示 
 		as2.forEach(a -> System.out.println(a.toString()));
 	}
 }

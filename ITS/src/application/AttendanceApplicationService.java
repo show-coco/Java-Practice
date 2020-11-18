@@ -16,8 +16,8 @@ public class AttendanceApplicationService {
 		this.attendRepo = attendRepo;
 	}
 
-	// 出退勤
-	public void attend(int empId, int typeId) {
+	// 出勤
+	public void attend(int empId) {
 		// TODO: リファクタリング
 		SimpleDateFormat df1 = new SimpleDateFormat("yyyy/MM/dd");
 		SimpleDateFormat df2 = new SimpleDateFormat("HH:mm");
@@ -25,8 +25,21 @@ public class AttendanceApplicationService {
 		String currentDate = df1.format(now);
 		String currentTime = df2.format(now);
 
-		AttendStatus as = new AttendStatus(new EmpId(empId), currentDate, typeId, currentTime);
+		AttendStatus as = new AttendStatus(new EmpId(empId), currentDate, 1, currentTime);
 
+		attendRepo.save(as);
+	}
+	
+	// 退勤
+	public void leave(int empId) {
+		SimpleDateFormat df1 = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat df2 = new SimpleDateFormat("HH:mm");
+		Date now = new Date();
+		String currentDate = df1.format(now);
+		String currentTime = df2.format(now);
+		
+		AttendStatus as = new AttendStatus(new EmpId(empId), currentDate, 2, currentTime);
+		
 		attendRepo.save(as);
 	}
 	
