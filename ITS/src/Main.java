@@ -55,14 +55,14 @@ public class Main {
 		/**************** 出退勤サンプル *****************/
 		
 		// emp1が出勤
-		attendApp.attend(emp1, 1);
+		attendApp.attend(1, 1);
 		// emp1の出退勤状況取得
-		ArrayList<AttendStatus> as = attendApp.get(emp1);
+		ArrayList<AttendStatus> as = attendApp.get(1);
 		// 出退勤状況表示
 		as.forEach(a -> System.out.println(a.toString()));
 
 		// emp1の特定の出勤況取得
-		AttendStatus as1 = attendApp.get(emp1, "2020/11/17", 1);
+		AttendStatus as1 = attendApp.get(1, "2020/11/18", 1);
 		// as1の出勤時間を変更
 		try {
 			attendApp.setTime(as1, "22:30");

@@ -1,22 +1,22 @@
 package domain.attend;
 
-import domain.employee.Employee;
+import domain.employee.EmpId;
 
 public class AttendStatus {
-	private Employee emp;
+	private EmpId empId;
 	private String date;
 	private int typeId;
 	private String time;
 
-	public AttendStatus(Employee emp, String date, int typeId, String time) {
-		this.emp = emp;
+	public AttendStatus(EmpId empId, String date, int typeId, String time) {
+		this.empId = empId;
 		this.date = date;
 		this.typeId = typeId;
 		this.time = time;
 	}
 	
-	public Employee getEmp() {
-		return emp;
+	public EmpId getEmpId() {
+		return empId;
 	}
 
 	public String getDate() {
@@ -41,6 +41,6 @@ public class AttendStatus {
 
 	@Override
 	public String toString() {
-		return "AttendanceStatus [emp=" + emp.getId().getValue() + ", date=" + date + ", typeId=" + typeId + ", time=" + time + "]";
+		return "AttendanceStatus [emp=" + empId.getValue() + ", date=" + date + ", typeId=" + typeId + ", time=" + time + "]";
 	}
 }
