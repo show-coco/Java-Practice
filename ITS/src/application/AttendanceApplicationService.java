@@ -3,6 +3,7 @@ package application;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import domain.attend.AttendStatus;
@@ -18,29 +19,37 @@ public class AttendanceApplicationService {
 
 	// 出勤
 	public void attend(int empId) {
-		// TODO: リファクタリング
-		SimpleDateFormat df1 = new SimpleDateFormat("yyyy/MM/dd");
-		SimpleDateFormat df2 = new SimpleDateFormat("HH:mm");
-		Date now = new Date();
-		String currentDate = df1.format(now);
-		String currentTime = df2.format(now);
-
-		AttendStatus as = new AttendStatus(new EmpId(empId), currentDate, 1, currentTime);
+		AttendStatus as = new AttendStatus(new EmpId(empId), getCurrentDate(), 1, getCurrentTime());
 
 		attendRepo.save(as);
 	}
 	
 	// 退勤
 	public void leave(int empId) {
-		SimpleDateFormat df1 = new SimpleDateFormat("yyyy/MM/dd");
-		SimpleDateFormat df2 = new SimpleDateFormat("HH:mm");
-		Date now = new Date();
-		String currentDate = df1.format(now);
-		String currentTime = df2.format(now);
-		
-		AttendStatus as = new AttendStatus(new EmpId(empId), currentDate, 2, currentTime);
+		AttendStatus as = new AttendStatus(new EmpId(empId), getCurrentDate(), 2, getCurrentTime());
 		
 		attendRepo.save(as);
+	}
+	
+	// 休暇登録
+	public void registVacation(int empId, String from, String to) {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		try {
+			Date fromDate = df.parse(from);
+			Date toDate = df.parse(to);
+			Calendar calendar = Calendar.getInstance();
+	        calendar.setTime(fromDate);
+
+	        Date date = fromDate;
+			while (!date.equals(toDate)) {
+				attendRepo.save(new AttendStatus(new EmpId(empId), df.format(date), 3, null));
+				calendar.add(Calendar.DAY_OF_MONTH, 1);
+				date = calendar.getTime();
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	// 出退勤状況の取得
@@ -61,5 +70,17 @@ public class AttendanceApplicationService {
 		
 		attendStatus.setTime(strTime);
 		attendRepo.save(attendStatus);
+	}
+	
+	public String getCurrentTime() { 
+		SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+		Date now = new Date();
+		return df.format(now);
+	}
+	
+	public String getCurrentDate() { 
+		SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		Date now = new Date();
+		return df.format(now);
 	}
 }

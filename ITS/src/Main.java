@@ -60,10 +60,14 @@ public class Main {
 		// id1の社員が退勤
 		attendApp.leave(1);
 		
+		/**** 休暇登録ページ ****/
+		attendApp.registVacation(1, "2020/11/18", "2020/11/30");
+		
 		/**** 出退勤状況表示ページ(変更できないページ) ****/
 		// id1の社員の出退勤状況取得
 		ArrayList<AttendStatus> as1 = attendApp.get(1);
 		// id1の社員の出退勤状況表示
+		System.out.println("=====出退勤状況表示=====");
 		as1.forEach(a -> System.out.println(a.toString()));
 
 		/**** 出退勤状況表示ページ(直変更できるページ) ****/
@@ -77,7 +81,8 @@ public class Main {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		// 変更後のid1の社員の出退勤状況再表示 
+		// 変更後のid1の社員の出退勤状況再表示
+		System.out.println("=====出退勤状況再表示=====");
 		as2.forEach(a -> System.out.println(a.toString()));
 	}
 }
