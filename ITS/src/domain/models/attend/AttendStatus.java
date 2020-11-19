@@ -1,6 +1,6 @@
-package domain.attend;
+package domain.models.attend;
 
-import domain.employee.EmpId;
+import domain.models.employee.EmpId;
 
 public class AttendStatus {
 	private EmpId empId;
@@ -29,13 +29,13 @@ public class AttendStatus {
 
 	public AttendTime getTime() {
 		return time;
-	} 
+	}
 	
-	public void setDate(AttendDate date) {
+	public void changeDate(AttendDate date) {
 		this.date = date;
 	}
 
-	public void setTime(AttendTime time) {
+	public void changeTime(AttendTime time) {
 		this.time = time;
 	}
 

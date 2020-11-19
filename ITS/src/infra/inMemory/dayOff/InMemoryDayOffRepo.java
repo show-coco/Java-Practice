@@ -1,8 +1,9 @@
-package repository.dayOff;
+package infra.inMemory.dayOff;
 
 import java.util.ArrayList;
 
-import domain.dayOff.DayOff;
+import domain.models.dayOff.DayOff;
+import domain.models.dayOff.IDayOffRepo;
 
 public class InMemoryDayOffRepo implements IDayOffRepo {
 	private ArrayList<DayOff> dayOffList = new  ArrayList<>();

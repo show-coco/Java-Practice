@@ -1,4 +1,4 @@
-package domain.employee;
+package domain.models.employee;
 
 import java.util.regex.PatternSyntaxException;
 

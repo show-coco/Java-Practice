@@ -4,16 +4,16 @@ import java.util.Date;
 import application.AttendanceApplicationService;
 import application.DayOffApplicationService;
 import application.EmployeeApplicationService;
-import domain.attend.AttendStatus;
-import domain.dayOff.DayOff;
-import domain.employee.EmpService;
-import domain.employee.Employee;
-import factory.employee.InMemoryEmpFactory;
-import repository.attend.IAttendRepo;
-import repository.attend.InMemoryAttendRepo;
-import repository.dayOff.IDayOffRepo;
-import repository.dayOff.InMemoryDayOffRepo;
-import repository.employee.InMemoryEmpRepo;
+import domain.models.attend.AttendStatus;
+import domain.models.attend.IAttendRepo;
+import domain.models.dayOff.DayOff;
+import domain.models.dayOff.IDayOffRepo;
+import domain.models.employee.Employee;
+import domain.services.EmpService;
+import infra.inMemory.attend.InMemoryAttendRepo;
+import infra.inMemory.dayOff.InMemoryDayOffRepo;
+import infra.inMemory.employee.InMemoryEmpFactory;
+import infra.inMemory.employee.InMemoryEmpRepo;
 
 public class Main {
 	public static void main(String[] args) {
@@ -80,7 +80,7 @@ public class Main {
 		System.out.println(aas.toString());
 		// id1の社員の2020/11/18の出勤時間を変更
 		try {
-			attendApp.setTime(aas, "22:30");
+			attendApp.changeTime(aas, "22:30");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -1,4 +1,4 @@
-package domain.employee;
+package domain.models.employee;
 
 public class Gender {
 	private int id;

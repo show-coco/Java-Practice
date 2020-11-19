@@ -1,10 +1,11 @@
-package repository.employee;
+package infra.inMemory.employee;
 
 import java.util.ArrayList;
 
-import domain.employee.EmpId;
-import domain.employee.EmpPassword;
-import domain.employee.Employee;
+import domain.models.employee.EmpId;
+import domain.models.employee.EmpPassword;
+import domain.models.employee.Employee;
+import domain.models.employee.IEmpRepo;
 
 public class InMemoryEmpRepo implements IEmpRepo {
 	private ArrayList<Employee> employees = new ArrayList<>();

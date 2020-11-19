@@ -5,16 +5,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import domain.employee.EmpId;
-import domain.employee.EmpName;
-import domain.employee.EmpPassword;
-import domain.employee.EmpService;
-import domain.employee.Employee;
-import domain.employee.Gender;
-import domain.employee.MailAddress;
-import domain.employee.PhoneNumber;
-import factory.employee.IEmpFactory;
-import repository.employee.IEmpRepo;
+import domain.models.employee.EmpId;
+import domain.models.employee.EmpName;
+import domain.models.employee.EmpPassword;
+import domain.models.employee.Employee;
+import domain.models.employee.Gender;
+import domain.models.employee.IEmpFactory;
+import domain.models.employee.IEmpRepo;
+import domain.models.employee.MailAddress;
+import domain.models.employee.PhoneNumber;
+import domain.services.EmpService;
 
 public class EmployeeApplicationService {
 	private IEmpFactory empFactory;

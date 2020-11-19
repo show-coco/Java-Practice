@@ -1,7 +1,5 @@
-package repository.dayOff;
+package domain.models.dayOff;
 import java.util.ArrayList;
-
-import domain.dayOff.DayOff;
 
 public interface IDayOffRepo {
 	void save(DayOff dayOff);

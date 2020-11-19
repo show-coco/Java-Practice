@@ -5,11 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import domain.attend.AttendDate;
-import domain.attend.AttendStatus;
-import domain.attend.AttendTime;
-import domain.employee.EmpId;
-import repository.attend.IAttendRepo;
+import domain.models.attend.AttendDate;
+import domain.models.attend.AttendStatus;
+import domain.models.attend.AttendTime;
+import domain.models.attend.IAttendRepo;
+import domain.models.employee.EmpId;
 
 public class AttendanceApplicationService {
 	private IAttendRepo attendRepo;
@@ -44,9 +44,9 @@ public class AttendanceApplicationService {
 	}
 
 	// 出退勤の変更・登録 
-	public void setTime(AttendStatus attendStatus, String time)  {
+	public void changeTime(AttendStatus attendStatus, String time)  {
 		try {
-			attendStatus.setTime(new AttendTime(getSpecifiedDate(time)));
+			attendStatus.changeTime(new AttendTime(getSpecifiedDate(time)));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

@@ -1,10 +1,6 @@
-package repository.employee;
+package domain.models.employee;
 
 import java.util.ArrayList;
-
-import domain.employee.EmpId;
-import domain.employee.EmpPassword;
-import domain.employee.Employee;
 
 public interface IEmpRepo {
 	public void save(Employee employee);

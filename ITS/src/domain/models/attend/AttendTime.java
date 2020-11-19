@@ -1,4 +1,4 @@
-package domain.attend;
+package domain.models.attend;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

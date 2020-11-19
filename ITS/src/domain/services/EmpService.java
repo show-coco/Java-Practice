@@ -1,6 +1,8 @@
-package domain.employee;
+package domain.services;
 
-import repository.employee.IEmpRepo;
+import domain.models.employee.EmpId;
+import domain.models.employee.Employee;
+import domain.models.employee.IEmpRepo;
 
 public class EmpService {
 	IEmpRepo employeeRepo; 

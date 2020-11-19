@@ -1,15 +1,15 @@
-package domain.attend;
+package domain.models.dayOff;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class AttendDate {
+public class DayOffDate {
 	private Date value;
 	private SimpleDateFormat df;
 
-	public AttendDate(Date date) {
-		if (date == null) throw new NullPointerException("出勤の日付がnullです");
+	public DayOffDate(Date date) {
+		if (date == null) throw new NullPointerException("休日がnullです");
 		df = new SimpleDateFormat("yyyy/MM/dd");
 		String strDate = df.format(date);
 

@@ -1,10 +1,8 @@
-package repository.attend;
+package domain.models.attend;
 
 import java.util.ArrayList;
 
-import domain.attend.AttendDate;
-import domain.attend.AttendStatus;
-import domain.employee.EmpId;
+import domain.models.employee.EmpId;
 
 public interface IAttendRepo {
 	void save(AttendStatus as);

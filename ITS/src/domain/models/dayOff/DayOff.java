@@ -1,8 +1,8 @@
-package domain.dayOff;
+package domain.models.dayOff;
 
 import java.util.Calendar;
 
-import domain.employee.EmpId;
+import domain.models.employee.EmpId;
 
 public class DayOff {
 	private EmpId empId;

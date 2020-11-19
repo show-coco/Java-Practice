@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import domain.dayOff.DayOff;
-import domain.dayOff.DayOffDate;
-import domain.employee.EmpId;
-import repository.dayOff.IDayOffRepo;
+import domain.models.dayOff.DayOff;
+import domain.models.dayOff.DayOffDate;
+import domain.models.dayOff.IDayOffRepo;
+import domain.models.employee.EmpId;
 
 public class DayOffApplicationService {
 	private IDayOffRepo dayOffRepo;
