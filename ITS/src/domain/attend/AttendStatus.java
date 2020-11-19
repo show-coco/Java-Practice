@@ -4,22 +4,22 @@ import domain.employee.EmpId;
 
 public class AttendStatus {
 	private EmpId empId;
-	private String date;
+	private AttendDate date;
+	private AttendTime time;
 	private int typeId;
-	private String time;
 
-	public AttendStatus(EmpId empId, String date, int typeId, String time) {
+	public AttendStatus(EmpId empId, AttendDate date, AttendTime time, int typeId) {
 		this.empId = empId;
 		this.date = date;
-		this.typeId = typeId;
 		this.time = time;
+		this.typeId = typeId;
 	}
 	
 	public EmpId getEmpId() {
 		return empId;
 	}
 
-	public String getDate() {
+	public AttendDate getDate() {
 		return date;
 	}
 
@@ -27,20 +27,20 @@ public class AttendStatus {
 		return typeId;
 	}
 
-	public String getTime() {
+	public AttendTime getTime() {
 		return time;
 	} 
 	
-	public void setDate(String date) {
+	public void setDate(AttendDate date) {
 		this.date = date;
 	}
 
-	public void setTime(String time) {
+	public void setTime(AttendTime time) {
 		this.time = time;
 	}
 
 	@Override
 	public String toString() {
-		return "AttendanceStatus [emp=" + empId.getValue() + ", date=" + date + ", typeId=" + typeId + ", time=" + time + "]";
+		return "AttendanceStatus [emp=" + empId.getValue() + ", date=" + date.toString() + ", typeId=" + typeId + "]";
 	}
 }

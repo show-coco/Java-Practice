@@ -1,8 +1,10 @@
 package repository.attend;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.stream.Collectors;
 
+import domain.attend.AttendDate;
 import domain.attend.AttendStatus;
 import domain.employee.EmpId;
 
@@ -20,9 +22,9 @@ public class InMemoryAttendRepo implements IAttendRepo {
 	}
 
 	@Override
-	public AttendStatus get(EmpId empId, String date, int type) {
+	public AttendStatus get(EmpId empId, AttendDate date, int type) {
 		return AttendStatuses.stream()
-				.filter(as -> as.getEmpId().equals(empId) && as.getDate().equals(date) && as.getTypeId() == type)
+				.filter(as -> as.getEmpId().equals(empId) && as.getDate().getValue().compareTo(date.getValue()) == 0 && as.getTypeId() == type)
 				.findFirst()
 				.orElse(null);
 	}

@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import domain.attend.AttendDate;
 import domain.attend.AttendStatus;
+import domain.attend.AttendTime;
 import domain.employee.EmpId;
 import repository.attend.IAttendRepo;
 
@@ -19,14 +21,16 @@ public class AttendanceApplicationService {
 
 	// 出勤
 	public void attend(int empId) {
-		AttendStatus as = new AttendStatus(new EmpId(empId), getCurrentDate(), 1, getCurrentTime());
+		AttendStatus as = new AttendStatus(new EmpId(empId), new AttendDate(new Date()), new AttendTime(new Date()), 1);
+		System.out.println(as);
 
 		attendRepo.save(as);
 	}
 	
 	// 退勤
 	public void leave(int empId) {
-		AttendStatus as = new AttendStatus(new EmpId(empId), getCurrentDate(), 2, getCurrentTime());
+		Date date = new Date();
+		AttendStatus as = new AttendStatus(new EmpId(empId), new AttendDate(date), new AttendTime(date), 2);
 		
 		attendRepo.save(as);
 	}
@@ -40,14 +44,13 @@ public class AttendanceApplicationService {
 			Calendar calendar = Calendar.getInstance();
 	        calendar.setTime(fromDate);
 
-	        Date date = fromDate;
-			while (!date.equals(toDate)) {
-				attendRepo.save(new AttendStatus(new EmpId(empId), df.format(date), 3, null));
+	        Date pointer = (Date) fromDate.clone();
+			while (!pointer.after(toDate)) { // pointerがtoDateより後ろに行ってないか
+				attendRepo.save(new AttendStatus(new EmpId(empId), new AttendDate(pointer), new AttendTime(null), 3));
 				calendar.add(Calendar.DAY_OF_MONTH, 1);
-				date = calendar.getTime();
+				pointer = calendar.getTime();
 			}
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -57,30 +60,22 @@ public class AttendanceApplicationService {
 		return attendRepo.get(new EmpId(empId));
 	}
 	
-	public AttendStatus get(int empId, String date, int type) {
-		return attendRepo.get(new EmpId(empId), date, type);
+	public AttendStatus get(int empId, Date date, int type) {
+		return attendRepo.get(new EmpId(empId), new AttendDate(date), type);
 	}
 
 	// 出退勤の変更・登録 
-	public void setTime(AttendStatus attendStatus, String time) throws ParseException {
-		SimpleDateFormat tf = new SimpleDateFormat("HH:mm");
-		Date newTime = new Date();
-		newTime = tf.parse(time);
-		String strTime = tf.format(newTime);
-		
-		attendStatus.setTime(strTime);
+	public void setTime(AttendStatus attendStatus, String time)  {
+		try {
+			attendStatus.setTime(new AttendTime(getSpecifiedDate(time)));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		attendRepo.save(attendStatus);
 	}
 	
-	public String getCurrentTime() { 
+	public Date getSpecifiedDate(String time) throws ParseException {
 		SimpleDateFormat df = new SimpleDateFormat("HH:mm");
-		Date now = new Date();
-		return df.format(now);
-	}
-	
-	public String getCurrentDate() { 
-		SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		Date now = new Date();
-		return df.format(now);
+		return df.parse(time);
 	}
 }

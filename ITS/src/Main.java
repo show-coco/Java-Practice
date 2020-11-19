@@ -1,7 +1,9 @@
 
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import application.AttendanceApplicationService;
 import application.EmployeeApplicationService;
@@ -61,7 +63,11 @@ public class Main {
 		attendApp.leave(1);
 		
 		/**** 休暇登録ページ ****/
-		attendApp.registVacation(1, "2020/11/18", "2020/11/30");
+		try {
+			attendApp.registVacation(1, "2020/11/18", "2020/11/30");			
+		} catch (NullPointerException e) {
+			System.out.println(e.getMessage());
+		}
 		
 		/**** 出退勤状況表示ページ(変更できないページ) ****/
 		// id1の社員の出退勤状況取得
@@ -74,11 +80,12 @@ public class Main {
 		// id1の社員の出退勤状況取得
 		ArrayList<AttendStatus> as2 = attendApp.get(1);
 		// id1の社員の特定の出勤況取得
-		AttendStatus aas = attendApp.get(1, "2020/11/18", 1);
+		AttendStatus aas = attendApp.get(1, new Date(), 1);
+		System.out.println(aas.toString());
 		// id1の社員の2020/11/18の出勤時間を変更
 		try {
 			attendApp.setTime(aas, "22:30");
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		// 変更後のid1の社員の出退勤状況再表示
