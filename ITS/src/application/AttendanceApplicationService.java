@@ -35,26 +35,6 @@ public class AttendanceApplicationService {
 		attendRepo.save(as);
 	}
 	
-	// 休暇登録
-	public void registVacation(int empId, String from, String to) {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		try {
-			Date fromDate = df.parse(from);
-			Date toDate = df.parse(to);
-			Calendar calendar = Calendar.getInstance();
-	        calendar.setTime(fromDate);
-
-	        Date pointer = (Date) fromDate.clone();
-			while (!pointer.after(toDate)) { // pointerがtoDateより後ろに行ってないか
-				attendRepo.save(new AttendStatus(new EmpId(empId), new AttendDate(pointer), new AttendTime(null), 3));
-				calendar.add(Calendar.DAY_OF_MONTH, 1);
-				pointer = calendar.getTime();
-			}
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	// 出退勤状況の取得
 	public ArrayList<AttendStatus> get(int empId) {
 		return attendRepo.get(new EmpId(empId));

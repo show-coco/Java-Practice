@@ -6,13 +6,17 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import application.AttendanceApplicationService;
+import application.DayOffApplicationService;
 import application.EmployeeApplicationService;
 import domain.attend.AttendStatus;
+import domain.dayOff.DayOff;
 import domain.employee.EmpService;
 import domain.employee.Employee;
 import factory.employee.InMemoryEmpFactory;
 import repository.attend.IAttendRepo;
 import repository.attend.InMemoryAttendRepo;
+import repository.dayOff.IDayOffRepo;
+import repository.dayOff.InMemoryDayOffRepo;
 import repository.employee.InMemoryEmpRepo;
 
 public class Main {
@@ -24,6 +28,9 @@ public class Main {
 		
 		IAttendRepo attendRepo = new InMemoryAttendRepo();
 		AttendanceApplicationService attendApp = new AttendanceApplicationService(attendRepo);
+		
+		IDayOffRepo dayOffRepo = new InMemoryDayOffRepo();
+		DayOffApplicationService dayOffApp = new DayOffApplicationService(dayOffRepo);
 
 		/**************** 社員サンプル *****************/
 
@@ -62,13 +69,6 @@ public class Main {
 		// id1の社員が退勤
 		attendApp.leave(1);
 		
-		/**** 休暇登録ページ ****/
-		try {
-			attendApp.registVacation(1, "2020/11/18", "2020/11/30");			
-		} catch (NullPointerException e) {
-			System.out.println(e.getMessage());
-		}
-		
 		/**** 出退勤状況表示ページ(変更できないページ) ****/
 		// id1の社員の出退勤状況取得
 		ArrayList<AttendStatus> as1 = attendApp.get(1);
@@ -91,5 +91,17 @@ public class Main {
 		// 変更後のid1の社員の出退勤状況再表示
 		System.out.println("=====出退勤状況再表示=====");
 		as2.forEach(a -> System.out.println(a.toString()));
+		
+		/**************** 休暇サンプル *****************/
+
+		/**** 休暇登録ページ ****/
+		try {
+			dayOffApp.registVacation(1, "2020/11/18", "2020/11/30");			
+		} catch (NullPointerException e) {
+			System.out.println(e.getMessage());
+		}
+		ArrayList<DayOff> dayOffList = dayOffApp.getAll();
+		System.out.println("=====休暇確認=====");
+		dayOffList.forEach(dayOff -> System.out.println(dayOff.toString()));
 	}
 }
