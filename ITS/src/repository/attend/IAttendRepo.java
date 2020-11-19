@@ -1,7 +1,6 @@
 package repository.attend;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import domain.attend.AttendDate;
 import domain.attend.AttendStatus;
