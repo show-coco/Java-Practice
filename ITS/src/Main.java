@@ -61,7 +61,11 @@ public class Main {
 		
 		/**** 出退勤ページ ****/
 		// id1の社員が出勤
-		attendApp.attend(1);
+		try {
+			attendApp.attend(1);
+		} catch (Exception e1) {
+			System.out.println(e1.getMessage());
+		}
 		// id1の社員が退勤
 		attendApp.leave(1);
 		

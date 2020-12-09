@@ -19,8 +19,15 @@ public class AttendanceApplicationService {
 	}
 
 	// 出勤
-	public void attend(int empId) {
-		AttendStatus as = new AttendStatus(new EmpId(empId), new AttendDate(new Date()), new AttendTime(new Date()), 1);
+	public void attend(int empId) throws Exception {
+		Date now = new Date();
+		AttendStatus todayAttend = attendRepo.get(new EmpId(empId), new AttendDate(now), 1);
+		
+		if (todayAttend != null) {
+			throw new Exception("既に出勤しています");
+		}
+		
+		AttendStatus as = new AttendStatus(new EmpId(empId), new AttendDate(now), new AttendTime(now), 1);
 		System.out.println(as);
 
 		attendRepo.save(as);
