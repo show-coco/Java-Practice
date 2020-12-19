@@ -3,14 +3,14 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 
-import domain.model.attendance.IAttendRepo;
-import domain.model.attendance.InMemoryAttendRepo;
-import domain.model.employee.Employee;
-import domain.model.employee.IEmpRepo;
-import domain.model.employee.InMemoryEmpRepo;
-import service.AttendService;
-import service.EmployeeService;
-import service.PaySlipService;
+import api.domain.model.attendance.IAttendRepo;
+import api.domain.model.attendance.InMemoryAttendRepo;
+import api.domain.model.employee.Employee;
+import api.domain.model.employee.IEmpRepo;
+import api.domain.model.employee.InMemoryEmpRepo;
+import api.service.AttendService;
+import api.service.EmployeeService;
+import api.service.PaySlipService;
 
 public class Main {
 
@@ -75,16 +75,20 @@ public class Main {
 		empList.forEach(emp -> System.out.println(emp.toString()));
 
 		// 出勤
-		LocalDate ld = LocalDate.now();
-		LocalTime lt = LocalTime.now();
-		lt = lt.plusHours(3).plusMinutes(20);
+		LocalDate ld = LocalDate.of(2020, 12, 21);
+		LocalTime lt = LocalTime.of(8, 30);
+		LocalTime leaveTime = lt.plusHours(8).plusMinutes(20);
 
-		attendService.attend(1, LocalDate.now(), LocalTime.now());
-		attendService.leave(1, ld, lt);
+		for(int i=0; i<80; i++) {
+			attendService.attend(1, ld, lt);
+			attendService.leave(1, ld, leaveTime);
+			
+			ld = ld.plusDays(1);			
+		}
 
 		System.out.println();
 
-		paySlipService.createPaySlip(1, 2020, 12);
+		paySlipService.createPaySlip(1, 2020, 1);
 	}
 
 }

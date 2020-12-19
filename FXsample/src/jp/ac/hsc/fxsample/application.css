@@ -1,0 +1,33 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+.light-blue-button {
+	-fx-background-color: #4384F4;
+	-fx-background-radius: 50px;
+	-fx-cursor: hand;
+	-fx-pref-height: 30px;
+	-fx-pref-width: 180px;
+}
+
+.sidebar-button-white {
+	-fx-background-color: white;
+	-fx-text-fill: black;
+	-fx-cursor: hand;
+}
+
+.sidebar-button-blue {
+	-fx-background-color: #4384F4;
+	-fx-text-fill: white;
+}
+
+.table-row-cell {
+    -fx-cell-size: 56;
+    -fx-font-size: 20px;
+}
+
+.number-column {
+	-fx-alignment: CENTER-RIGHT;
+}
+
+.string-column {
+	-fx-alignment: center;
+}

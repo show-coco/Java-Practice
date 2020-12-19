@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<fx:root prefHeight="820.0" prefWidth="1280.0" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <GridPane alignment="CENTER_LEFT" prefHeight="820.0" prefWidth="1120.0">
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints minHeight="10.0" prefHeight="270.0" />
+            <RowConstraints minHeight="10.0" prefHeight="50.0" />
+            <RowConstraints minHeight="10.0" prefHeight="50.0" />
+            <RowConstraints minHeight="10.0" prefHeight="500.0" />
+         </rowConstraints>
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints maxWidth="96.0" minWidth="10.0" prefWidth="96.0" />
+            <ColumnConstraints maxWidth="925.0" minWidth="10.0" prefWidth="925.0" />
+            <ColumnConstraints maxWidth="96.0" minWidth="10.0" prefWidth="96.0" />
+         </columnConstraints>
+         <children>
+            <GridPane gridLinesVisible="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+            <TableView fx:id="TableView" maxHeight="500.0" maxWidth="925.0" prefHeight="500.0" prefWidth="925.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+              <columns>
+                <TableColumn fx:id="EmployeeName" maxWidth="185.0" prefWidth="185.0" resizable="false" text="名前" />
+                <TableColumn fx:id="EmployeeId" maxWidth="185.0" prefWidth="185.0" resizable="false" sortable="false" text="社員ID" />
+                  <TableColumn fx:id="Enrollment" maxWidth="185.0" prefWidth="185.0" resizable="false" sortable="false" text="在籍状況" />
+                  <TableColumn fx:id="Department" maxWidth="185.0" prefWidth="170.0" resizable="false" sortable="false" text="部署" />
+                  <TableColumn fx:id="Details" maxWidth="185.0" prefWidth="165.0" resizable="false" sortable="false" text="詳細" />
+              </columns>
+            </TableView>
+            <Button fx:id="EmployeeAdd" mnemonicParsing="false" prefHeight="35.0" prefWidth="130.0" text="社員を追加する" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <GridPane prefHeight="270.0" prefWidth="1020.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="Label1" text="部署" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Label2" text="名前" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Label3" text="社員ID" GridPane.columnIndex="2" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="Label4" text="在籍状況" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <MenuButton fx:id="SearchDepartment" mnemonicParsing="false" text="指定なし" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </MenuButton>
+                  <MenuButton fx:id="SearchEnrollment" mnemonicParsing="false" text="指定なし" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem mnemonicParsing="false" text="Action 2" />
+                     </items>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </MenuButton>
+                  <TextField fx:id="SearchId" prefHeight="31.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="18.0" />
+                     </font></TextField>
+                  <TextField fx:id="SearchName" prefHeight="31.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                     <font>
+                        <Font size="18.0" />
+                     </font></TextField>
+                  <Button fx:id="Search" mnemonicParsing="false" text="検索" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="24.0" />
+                     </font></Button>
+                  <Button fx:id="Clear" mnemonicParsing="false" text="クリア" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="24.0" />
+                     </font></Button>
+               </children>
+            </GridPane>
+            <GridPane GridPane.columnIndex="2" GridPane.rowIndex="3">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="Label5" text="社員一覧" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="Left" mnemonicParsing="false" text="Button" />
+                  <Button fx:id="Right" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Button" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
+   </center>
+   <left>
+		<fx:include source="Sidebar.fxml" />
+   </left>
+</fx:root>
